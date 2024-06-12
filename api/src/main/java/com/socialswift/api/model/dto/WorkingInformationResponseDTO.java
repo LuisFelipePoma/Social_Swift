@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WorkingInformationResponseDTO {
+    private Long id;
     private String position;
     private String educationLevel;
     private String contracType;
