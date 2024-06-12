@@ -31,7 +31,7 @@ public class PersonService {
     private final PersonRepository personRepository;
     private final WorkingInformationRepository workingInformationRepository;
 
-    public List<PersonResponseDTO> getAllStudents() {
+    public List<PersonResponseDTO> getPeople() {
         List<Person> people = personRepository.findAll();
         
         List<PersonResponseDTO> peopleResponseDTOList = 
@@ -43,7 +43,8 @@ public class PersonService {
 
     public PersonResponseDTO getInformationByPerson (Person person) {
         WorkingInformation information = workingInformationRepository.findByPerson(person)
-                    .orElseThrow(() -> new ResourceNotFoundException("Information not found"));
+                    .orElse(null);
+        if(information == null) return personMapper.convertPersonToResponseDTO(person);
         
         WorkingInformationResponseDTO informationResponseDTO = workingInformationMapper.convertWorkingInformationToDTO(information);
         PersonResponseDTO personResponseDTO = personMapper.convertPersonToResponseDTO(person);
@@ -60,6 +61,8 @@ public class PersonService {
             throw new ResourceDuplicateException("Phone number already registered.");
         
         Person person = personMapper.convertPersonCreateDTOToEntity(personCreateRequestDTO);
+
+        person = personRepository.save(person);
 
         return personMapper.convertPersonToPersonCreateDTO(person);
     }

@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PersonCreateRequestDTO {
     @NotBlank(message = "DNI can not be empty.")
-    @Size(min = 8, message = "DNI must have at least 8 characters.")
+    @Size(max = 8, message = "DNI must have at least 8 characters.")
     @Pattern(regexp = "^[0-9]*$", message = "DNI must have only numbers.")
     private String dni;
 
@@ -27,7 +27,6 @@ public class PersonCreateRequestDTO {
     @Pattern(regexp = "^[a-zA-Z]*$", message = "Lastname must have only letters.")
     private String lastname;
 
-    @NotBlank(message = "Birth date can not be empty.")
     private LocalDate birthDate;
 
     @NotBlank(message = "Address can not be empty.")
@@ -41,6 +40,5 @@ public class PersonCreateRequestDTO {
     @Email
     private String email;
 
-    @NotBlank(message = "Picture can not be empty.")
     private byte[] picture;
 }
