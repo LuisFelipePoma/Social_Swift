@@ -29,9 +29,6 @@ public class Company {
     @Column(name = "ruc", nullable = false)
     private String ruc;
 
-    @Column(name = "position", nullable = false)
-    private String position;
-
     @Column(name = "sector", nullable = false)
     private String sector;
 

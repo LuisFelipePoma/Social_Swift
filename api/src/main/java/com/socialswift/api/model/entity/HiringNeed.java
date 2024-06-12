@@ -47,7 +47,7 @@ public class HiringNeed {
     private Boolean certification;
 
     @Column(name = "experience", nullable = false)
-    private String experience;
+    private Boolean experience;
 
     @Column(name = "education_level", nullable = false)
     private String educationLevel;

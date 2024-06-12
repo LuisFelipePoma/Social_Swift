@@ -5,7 +5,6 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.socialswift.api.model.entity.Person;
-import java.util.List;
 
 
 public interface PersonRepository extends JpaRepository<Person, Long> {

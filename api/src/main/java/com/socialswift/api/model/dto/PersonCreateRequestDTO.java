@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PersonCreateRequestDTO {
     @NotBlank(message = "DNI can not be empty.")
-    @Size(max = 8, message = "DNI must have at least 8 characters.")
+    @Size(min=8, max = 8, message = "DNI must have at least 8 characters.")
     @Pattern(regexp = "^[0-9]*$", message = "DNI must have only numbers.")
     private String dni;
 
