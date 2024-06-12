@@ -4,10 +4,14 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.socialswift.api.exception.ResourceDuplicateException;
 import com.socialswift.api.exception.ResourceNotFoundException;
 import com.socialswift.api.mapper.PersonMapper;
 import com.socialswift.api.mapper.WorkingInformationMapper;
+import com.socialswift.api.model.dto.PersonCreateRequestDTO;
+import com.socialswift.api.model.dto.PersonCreateResponseDTO;
 import com.socialswift.api.model.dto.PersonResponseDTO;
+import com.socialswift.api.model.dto.PersonUpdateRequestDTO;
 import com.socialswift.api.model.dto.WorkingInformationResponseDTO;
 import com.socialswift.api.model.entity.Person;
 import com.socialswift.api.model.entity.WorkingInformation;
@@ -27,7 +31,7 @@ public class PersonService {
     private final PersonRepository personRepository;
     private final WorkingInformationRepository workingInformationRepository;
 
-    public List<PersonResponseDTO> getAllStudents() {
+    public List<PersonResponseDTO> getPeople() {
         List<Person> people = personRepository.findAll();
         
         List<PersonResponseDTO> peopleResponseDTOList = 
@@ -39,7 +43,8 @@ public class PersonService {
 
     public PersonResponseDTO getInformationByPerson (Person person) {
         WorkingInformation information = workingInformationRepository.findByPerson(person)
-                    .orElseThrow(() -> new ResourceNotFoundException("Information not found"));
+                    .orElse(null);
+        if(information == null) return personMapper.convertPersonToResponseDTO(person);
         
         WorkingInformationResponseDTO informationResponseDTO = workingInformationMapper.convertWorkingInformationToDTO(information);
         PersonResponseDTO personResponseDTO = personMapper.convertPersonToResponseDTO(person);
@@ -48,10 +53,43 @@ public class PersonService {
         return personResponseDTO;
     }
 
+    public PersonCreateResponseDTO createPerson (PersonCreateRequestDTO personCreateRequestDTO) {
+        if (personRepository.findByDni(personCreateRequestDTO.getDni()).isPresent())
+            throw new ResourceDuplicateException("DNI already registered");
+        
+        if (personRepository.findByPhoneNumber(personCreateRequestDTO.getPhoneNumber()).isPresent())
+            throw new ResourceDuplicateException("Phone number already registered.");
+        
+        Person person = personMapper.convertPersonCreateDTOToEntity(personCreateRequestDTO);
+
+        person = personRepository.save(person);
+
+        return personMapper.convertPersonToPersonCreateDTO(person);
+    }
+
+    public PersonCreateResponseDTO updatePerson (Long id, PersonUpdateRequestDTO personUpdateRequestDTO) {
+        Person person = personRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Person not found"));
+        
+        person.setAddress(personUpdateRequestDTO.getAddress());
+        person.setPhoneNumber(personUpdateRequestDTO.getPhoneNumber());
+        person.setEmail(personUpdateRequestDTO.getEmail());
+
+        personRepository.save(person);
+
+        return personMapper.convertPersonToPersonCreateDTO(person);
+    }
+
     public PersonResponseDTO getById(Long id) {
         Person person = personRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Person not found"));
         
         return personMapper.convertPersonToResponseDTO(person);
+    }
+
+    public void deletePerson (Long id) {
+        Person person = personRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Person not found"));
+        personRepository.delete(person);
     }
 }

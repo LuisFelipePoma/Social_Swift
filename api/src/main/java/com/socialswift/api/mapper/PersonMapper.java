@@ -5,6 +5,8 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import com.socialswift.api.model.dto.PersonCreateRequestDTO;
+import com.socialswift.api.model.dto.PersonCreateResponseDTO;
 import com.socialswift.api.model.dto.PersonResponseDTO;
 import com.socialswift.api.model.entity.Person;
 
@@ -24,5 +26,13 @@ public class PersonMapper {
         return people.stream()
             .map(this::convertPersonToResponseDTO)
             .toList();
+    }
+
+    public Person convertPersonCreateDTOToEntity (PersonCreateRequestDTO personCreateRequestDTO) {
+        return modelMapper.map(personCreateRequestDTO, Person.class);
+    }
+
+    public PersonCreateResponseDTO convertPersonToPersonCreateDTO (Person person) {
+        return modelMapper.map(person, PersonCreateResponseDTO.class);
     }
 }
