@@ -75,6 +75,8 @@ public class PersonService {
         person.setPhoneNumber(personUpdateRequestDTO.getPhoneNumber());
         person.setEmail(personUpdateRequestDTO.getEmail());
 
+        personRepository.save(person);
+
         return personMapper.convertPersonToPersonCreateDTO(person);
     }
 

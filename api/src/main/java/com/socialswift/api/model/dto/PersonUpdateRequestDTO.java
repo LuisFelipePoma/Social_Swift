@@ -1,7 +1,8 @@
 package com.socialswift.api.model.dto;
 
-import jakarta.persistence.Column;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,9 +14,11 @@ public class PersonUpdateRequestDTO {
     @NotBlank(message = "Address can not be empty.")
     private String address;
 
-    @Column(name = "phone_number", nullable = false)
+    @NotBlank(message = "Phone number can not be empty.")
+    @Size(min = 9, message = "Phone number must have at least 9 characters.")
     private String phoneNumber;
 
-    @Column(name = "email", nullable = false)
+    @NotBlank(message = "Email can not be empty.")
+    @Email
     private String email;
 }
