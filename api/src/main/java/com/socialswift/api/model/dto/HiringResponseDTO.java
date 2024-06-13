@@ -10,19 +10,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class HiringNeedResponseDTO {
+public class HiringResponseDTO {
     private Long id;
-    private String position;
-    private String description;
     private LocalDate startDate;
     private LocalDate endDate;
-    private Long companyId;
-    private Integer amountPeople;
-    private Boolean certification;
-    private Boolean experience;
+    private String position;
     private BigDecimal salary;
-    private String educationLevel;
-    private String contractType;
-    private String state;
+    private BigDecimal state;
     private CompanyResponseDTO company;
+    private PersonResponseDTO person;
 }
