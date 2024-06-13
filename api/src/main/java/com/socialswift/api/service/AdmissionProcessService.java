@@ -21,87 +21,84 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class AdmissionProcessService {
-    private final AdmissionProcessMapper admissionProcessMapper;
+	private final AdmissionProcessMapper admissionProcessMapper;
 
-    private final AdmissionProcessRepository admissionProcessRepository;
-    private final PersonRepository personRepository;
-    private final HiringNeedRepository hiringNeedRepository;
+	private final AdmissionProcessRepository admissionProcessRepository;
+	private final PersonRepository personRepository;
+	private final HiringNeedRepository hiringNeedRepository;
 
-    public AdmissionProcessResponseDTO getById(Long id) {
-        AdmissionProcess admission = admissionProcessRepository.findById(id)
-                    .orElseThrow(() -> new ResourceNotFoundException("Admission process not found"));
+	public AdmissionProcessResponseDTO getById(Long id) {
+		AdmissionProcess admission = admissionProcessRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Admission process not found"));
 
-        return admissionProcessMapper.convertEntityToResponseDTO(admission);
-    }
+		return admissionProcessMapper.convertEntityToResponseDTO(admission);
+	}
 
-    public List<AdmissionProcessResponseDTO> getAll() {
-        List<AdmissionProcess> admissions = admissionProcessRepository.findAllByOrderByStateAscApplicationDateAsc();
-        
-        return admissionProcessMapper.convertToListDTO(admissions);
-    }
+	public List<AdmissionProcessResponseDTO> getAll() {
+		List<AdmissionProcess> admissions = admissionProcessRepository.findAllByOrderByStateAscApplicationDateAsc();
 
-    public List<AdmissionProcessResponseDTO> getAllByHiringNeed(Long id) {
-        HiringNeed hiringNeed = hiringNeedRepository.findById(id)
-                    .orElseThrow(() -> new ResourceNotFoundException("Hiring need not found"));
-        List<AdmissionProcess> admissions = admissionProcessRepository.findAllByHiringNeedOrderByStateAscApplicationDateAsc(hiringNeed);
+		return admissionProcessMapper.convertToListDTO(admissions);
+	}
 
-        return admissionProcessMapper.convertToListDTO(admissions);
-    }
+	public List<AdmissionProcessResponseDTO> getAllByHiringNeed(Long id) {
+		HiringNeed hiringNeed = hiringNeedRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Hiring need not found"));
+		List<AdmissionProcess> admissions = admissionProcessRepository
+				.findAllByHiringNeedOrderByStateAscApplicationDateAsc(hiringNeed);
 
-    public AdmissionProcessResponseDTO createAdmission(AdmissionProcessCreateRequestDTO admissionProcessCreateRequestDTO) {
-        AdmissionProcessCreateRequestDTO admissionProcess = new AdmissionProcessCreateRequestDTO();
-        admissionProcess.setPersonId(admissionProcessCreateRequestDTO.getPersonId());
-        admissionProcess.setHiringNeedId(admissionProcessCreateRequestDTO.getHiringNeedId());
-        admissionProcess.setApplicationDate(admissionProcessCreateRequestDTO.getApplicationDate());
-        admissionProcess.setInterviewDate(admissionProcessCreateRequestDTO.getInterviewDate());
+		return admissionProcessMapper.convertToListDTO(admissions);
+	}
 
+	public AdmissionProcessResponseDTO createAdmission(
+			AdmissionProcessCreateRequestDTO admissionProcessCreateRequestDTO) {
+		AdmissionProcess admissionProcess = admissionProcessMapper
+				.convertCreateRequestToEntity(admissionProcessCreateRequestDTO);
 
-        Person person = personRepository.findById(admissionProcessCreateRequestDTO.getPersonId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Person not found"));
+		Person person = personRepository.findById(admissionProcessCreateRequestDTO.getPersonId())
+				.orElseThrow(() -> new ResourceNotFoundException("Person not found"));
 
-        HiringNeed hiringNeed = hiringNeedRepository.findById(admissionProcessCreateRequestDTO.getHiringNeedId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Hiring Need not found"));
+		HiringNeed hiringNeed = hiringNeedRepository.findById(admissionProcessCreateRequestDTO.getHiringNeedId())
+				.orElseThrow(() -> new ResourceNotFoundException("Hiring Need not found"));
 
-        if(admissionProcessRepository.findByHiringNeedAndPerson(hiringNeed, person).isPresent())
-            throw new ResourceDuplicateException("Admission Process related to this user already exists");
-            
-        AdmissionProcess admission = admissionProcessMapper.convertCreateRequestToEntity(admissionProcessCreateRequestDTO);
+		if (admissionProcessRepository.findByHiringNeedAndPerson(hiringNeed, person).isPresent())
+			throw new ResourceDuplicateException("Admission Process related to this user already exists");
 
-        admission.setPerson(person);
-        admission.setHiringNeed(hiringNeed);
-        admission.setState("Pending");
-        admission = admissionProcessRepository.save(admission);
+		// admissionProcess.setId(null);
+		admissionProcess.setPerson(person);
+		admissionProcess.setHiringNeed(hiringNeed);
+		admissionProcess.setState("Pending");
+		admissionProcess = admissionProcessRepository.save(admissionProcess);
 
-        return admissionProcessMapper.convertEntityToResponseDTO(admission);
-    }
+		return admissionProcessMapper.convertEntityToResponseDTO(admissionProcess);
+	}
 
-    public List<AdmissionProcessResponseDTO> getAllByPerson(Long id) {
-        Person person = personRepository.findById(id)
-                    .orElseThrow(() -> new ResourceNotFoundException("Person not found"));
+	public List<AdmissionProcessResponseDTO> getAllByPerson(Long id) {
+		Person person = personRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Person not found"));
 
-        List<AdmissionProcess> admissions = admissionProcessRepository.findAllByPersonOrderByApplicationDate(person);
+		List<AdmissionProcess> admissions = admissionProcessRepository.findAllByPersonOrderByApplicationDate(person);
 
-        return admissionProcessMapper.convertToListDTO(admissions);
-    }
+		return admissionProcessMapper.convertToListDTO(admissions);
+	}
 
-    public AdmissionProcessResponseDTO admitAdmissionProcess(Long id) {
-        AdmissionProcess admission = admissionProcessRepository.findById(id)
-                    .orElseThrow(() -> new ResourceNotFoundException("Admission Process not found"));
+	public AdmissionProcessResponseDTO admitAdmissionProcess(Long id) {
+		AdmissionProcess admission = admissionProcessRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Admission Process not found"));
 
-        admission.setState("Admitted");
-        admission = admissionProcessRepository.save(admission);
-        // Implement the addition to hirings
+		admission.setState("Admitted");
+		admission = admissionProcessRepository.save(admission);
+		// Implement the addition to hirings
 
-        return admissionProcessMapper.convertEntityToResponseDTO(admission);
-    }
+		return admissionProcessMapper.convertEntityToResponseDTO(admission);
+	}
 
-    public AdmissionProcessResponseDTO rejectAdmissionProcess(Long id) {
-        AdmissionProcess admission = admissionProcessRepository.findById(id)
-                    .orElseThrow(() -> new ResourceNotFoundException("Admission Process not found"));
+	public AdmissionProcessResponseDTO rejectAdmissionProcess(Long id) {
+		AdmissionProcess admission = admissionProcessRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Admission Process not found"));
 
-        admission.setState("Rejected");
-        admission = admissionProcessRepository.save(admission);
+		admission.setState("Rejected");
+		admission = admissionProcessRepository.save(admission);
 
-        return admissionProcessMapper.convertEntityToResponseDTO(admission);
-    }
+		return admissionProcessMapper.convertEntityToResponseDTO(admission);
+	}
 }

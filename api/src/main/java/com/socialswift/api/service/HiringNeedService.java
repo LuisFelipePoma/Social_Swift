@@ -21,85 +21,81 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class HiringNeedService {
-    private final HiringNeedMapper hiringNeedMapper;
-    private final CompanyMapper companyMapper;
+	private final HiringNeedMapper hiringNeedMapper;
+	private final CompanyMapper companyMapper;
 
-    private final HiringNeedRepository hiringNeedRepository;
-    private final CompanyRepository companyRepository;
+	private final HiringNeedRepository hiringNeedRepository;
+	private final CompanyRepository companyRepository;
 
-    public HiringNeedResponseDTO getById(Long id) {
-        HiringNeed hiringNeed = hiringNeedRepository.findById(id)
-                    .orElseThrow(() -> new ResourceNotFoundException("Hiring need not found"));
-        
-        return hiringNeedMapper.convertEntityToResponseDTO(hiringNeed);
-    }
+	public HiringNeedResponseDTO getById(Long id) {
+		HiringNeed hiringNeed = hiringNeedRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Hiring need not found"));
 
-    public List<HiringNeedResponseDTO> getAllNeeds() {
-        List<HiringNeed> needs = hiringNeedRepository.findAllByOrderByStartDateAsc();
-        return hiringNeedMapper.convertToListDTO(needs);
-    }
+		return hiringNeedMapper.convertEntityToResponseDTO(hiringNeed);
+	}
 
-    @Transactional
-    public HiringNeedResponseDTO createHiringNeed(HiringNeedCreateRequestDTO hiringNeedCreateRequestDTO) {
-        Company company = companyRepository.findById(hiringNeedCreateRequestDTO.getCompanyId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Company not found"));
+	public List<HiringNeedResponseDTO> getAllNeeds() {
+		List<HiringNeed> needs = hiringNeedRepository.findAllByOrderByStartDateAsc();
+		return hiringNeedMapper.convertToListDTO(needs);
+	}
 
-        if(hiringNeedCreateRequestDTO.getCertification() == null){
-            hiringNeedCreateRequestDTO.setCertification(false);
-        }
-        if(hiringNeedCreateRequestDTO.getExperience() == null){
-            hiringNeedCreateRequestDTO.setExperience(false);
-        }
-        HiringNeed hiringNeed = new HiringNeed();
-        hiringNeed.setPosition(hiringNeedCreateRequestDTO.getPosition());
-        hiringNeed.setDescription(hiringNeedCreateRequestDTO.getDescription());
-        hiringNeed.setStartDate(hiringNeedCreateRequestDTO.getStartDate());
-        hiringNeed.setEndDate(hiringNeedCreateRequestDTO.getEndDate());
-        hiringNeed.setAmountPeople(hiringNeedCreateRequestDTO.getAmountPeople());
-        hiringNeed.setCertification(hiringNeedCreateRequestDTO.getCertification());
-        hiringNeed.setExperience(hiringNeedCreateRequestDTO.getExperience());
-        hiringNeed.setEducationLevel(hiringNeedCreateRequestDTO.getEducationLevel());
-        hiringNeed.setContractType(hiringNeedCreateRequestDTO.getContractType());
-        hiringNeed.setState("Ongoing");
-        hiringNeed.setCompany(company);
+	@Transactional
+	public HiringNeedResponseDTO createHiringNeed(HiringNeedCreateRequestDTO hiringNeedCreateRequestDTO) {
+		Company company = companyRepository.findById(hiringNeedCreateRequestDTO.getCompanyId())
+				.orElseThrow(() -> new ResourceNotFoundException("Company not found"));
 
-        hiringNeed = hiringNeedRepository.save(hiringNeed);
+		if (hiringNeedCreateRequestDTO.getCertification() == null) {
+			hiringNeedCreateRequestDTO.setCertification(false);
+		}
+		if (hiringNeedCreateRequestDTO.getExperience() == null) {
+			hiringNeedCreateRequestDTO.setExperience(false);
+		}
+		HiringNeed hiringNeed = hiringNeedMapper.convertCreateRequestToEntity(hiringNeedCreateRequestDTO);
+		
+		// hiringNeed.setId(null);
+		hiringNeed.setState("Ongoing");
+		hiringNeed.setCompany(company);
 
-        CompanyResponseDTO companyDTO = companyMapper.convertCompanyToResponse(company);
-        HiringNeedResponseDTO hiringNeedResponseDTO = hiringNeedMapper.convertEntityToResponseDTO(hiringNeed);
-        hiringNeedResponseDTO.setCompany(companyDTO);
+		hiringNeed = hiringNeedRepository.save(hiringNeed);
 
-        return hiringNeedResponseDTO;
-    }
+		CompanyResponseDTO companyDTO = companyMapper.convertCompanyToResponse(company);
+		HiringNeedResponseDTO hiringNeedResponseDTO = hiringNeedMapper.convertEntityToResponseDTO(hiringNeed);
+		hiringNeedResponseDTO.setCompany(companyDTO);
 
-    public HiringNeedResponseDTO closeHiringNeed(Long id) {
-        HiringNeed hiringNeed = hiringNeedRepository.findById(id)
-                    .orElseThrow(() -> new ResourceNotFoundException("Hiring need not found"));
+		return hiringNeedResponseDTO;
+	}
 
-        hiringNeed.setState("Closed");
-        hiringNeed = hiringNeedRepository.save(hiringNeed);
-        return hiringNeedMapper.convertEntityToResponseDTO(hiringNeed);
-    }
+	public HiringNeedResponseDTO closeHiringNeed(Long id) {
+		HiringNeed hiringNeed = hiringNeedRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Hiring need not found"));
 
-    public List<HiringNeedResponseDTO> getAllByCompany(Long companyId) {
-        Company company = companyRepository.findById(companyId)
-                    .orElseThrow(() -> new ResourceNotFoundException("Company not found"));
-        List<HiringNeed> needs = hiringNeedRepository.findAllByCompanyOrderByStateDescStartDateAsc(company);
+		hiringNeed.setState("Closed");
+		hiringNeed = hiringNeedRepository.save(hiringNeed);
+		return hiringNeedMapper.convertEntityToResponseDTO(hiringNeed);
+	}
 
-        return hiringNeedMapper.convertToListDTO(needs);
-    }
+	public List<HiringNeedResponseDTO> getAllByCompany(Long companyId) {
+		Company company = companyRepository.findById(companyId)
+				.orElseThrow(() -> new ResourceNotFoundException("Company not found"));
+		List<HiringNeed> needs = hiringNeedRepository.findAllByCompanyOrderByStateDescStartDateAsc(company);
 
-    // public List<HiringNeedResponseDTO> getAllByCompanyAndState(Long companyId, String state) {
-    //     Company company = companyRepository.findById(companyId)
-    //                 .orElseThrow(() -> new ResourceNotFoundException("Company not found"));
-    //     List<HiringNeed> needs = hiringNeedRepository.findAllByCompanyAndStateOrderByStartDateAsc(company, state);
+		return hiringNeedMapper.convertToListDTO(needs);
+	}
 
-    //     return hiringNeedMapper.convertToListDTO(needs);
-    // }
+	// public List<HiringNeedResponseDTO> getAllByCompanyAndState(Long companyId,
+	// String state) {
+	// Company company = companyRepository.findById(companyId)
+	// .orElseThrow(() -> new ResourceNotFoundException("Company not found"));
+	// List<HiringNeed> needs =
+	// hiringNeedRepository.findAllByCompanyAndStateOrderByStartDateAsc(company,
+	// state);
 
-    public List<HiringNeedResponseDTO> getAllByState(String state) {
-        List<HiringNeed> needs = hiringNeedRepository.findAllByStateOrderByStateDescStartDateAsc(state);
+	// return hiringNeedMapper.convertToListDTO(needs);
+	// }
 
-        return hiringNeedMapper.convertToListDTO(needs);
-    }
+	public List<HiringNeedResponseDTO> getAllByState(String state) {
+		List<HiringNeed> needs = hiringNeedRepository.findAllByStateOrderByStateDescStartDateAsc(state);
+
+		return hiringNeedMapper.convertToListDTO(needs);
+	}
 }
