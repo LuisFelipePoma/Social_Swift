@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AdmissionProcessCreateRequestDTO {
     @NotNull(message = "Person ID is required")
-    private Long personId;
+    private Long person;
 
     @NotNull(message = "Hiring Need ID is required")
-    private Long hiringNeedId;
+    private Long hiringNeed;
 
     private LocalDate applicationDate;
 

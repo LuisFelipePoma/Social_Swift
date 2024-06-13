@@ -41,7 +41,7 @@ public class HiringNeedService {
 
 	@Transactional
 	public HiringNeedResponseDTO createHiringNeed(HiringNeedCreateRequestDTO hiringNeedCreateRequestDTO) {
-		Company company = companyRepository.findById(hiringNeedCreateRequestDTO.getCompanyId())
+		Company company = companyRepository.findById(hiringNeedCreateRequestDTO.getCompany())
 				.orElseThrow(() -> new ResourceNotFoundException("Company not found"));
 
 		if (hiringNeedCreateRequestDTO.getCertification() == null) {

@@ -1,5 +1,6 @@
 package com.socialswift.api.model.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -48,6 +49,9 @@ public class HiringNeed {
 
     @Column(name = "experience", nullable = false)
     private Boolean experience;
+
+    @Column(name = "salary", nullable = false)
+    private BigDecimal salary;
 
     @Column(name = "education_level", nullable = false)
     private String educationLevel;

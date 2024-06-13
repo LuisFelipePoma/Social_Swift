@@ -54,10 +54,10 @@ public class AdmissionProcessService {
 		AdmissionProcess admissionProcess = admissionProcessMapper
 				.convertCreateRequestToEntity(admissionProcessCreateRequestDTO);
 
-		Person person = personRepository.findById(admissionProcessCreateRequestDTO.getPersonId())
+		Person person = personRepository.findById(admissionProcessCreateRequestDTO.getPerson())
 				.orElseThrow(() -> new ResourceNotFoundException("Person not found"));
 
-		HiringNeed hiringNeed = hiringNeedRepository.findById(admissionProcessCreateRequestDTO.getHiringNeedId())
+		HiringNeed hiringNeed = hiringNeedRepository.findById(admissionProcessCreateRequestDTO.getHiringNeed())
 				.orElseThrow(() -> new ResourceNotFoundException("Hiring Need not found"));
 
 		if (admissionProcessRepository.findByHiringNeedAndPerson(hiringNeed, person).isPresent())

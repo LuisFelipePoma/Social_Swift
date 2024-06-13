@@ -1,5 +1,6 @@
 package com.socialswift.api.model.dto;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import jakarta.validation.constraints.Min;
@@ -24,12 +25,14 @@ public class HiringNeedCreateRequestDTO {
     private LocalDate endDate;
 
     @NotNull(message = "Company ID is required")
-    private Long companyId;
+    private Long company;
 
     @Min(value = 1, message = "Amount of people must be greater than 0")
     private Integer amountPeople;
 
     private Boolean certification;
+
+    private BigDecimal salary;
 
     private Boolean experience;
 
