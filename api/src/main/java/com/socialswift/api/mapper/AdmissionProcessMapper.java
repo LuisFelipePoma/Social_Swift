@@ -5,6 +5,7 @@ import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import com.socialswift.api.model.dto.AdmissionProcessAdmitResponseDTO;
 import com.socialswift.api.model.dto.AdmissionProcessCreateRequestDTO;
 import com.socialswift.api.model.dto.AdmissionProcessResponseDTO;
 import com.socialswift.api.model.entity.AdmissionProcess;
@@ -22,6 +23,10 @@ public class AdmissionProcessMapper {
 
     public AdmissionProcessResponseDTO convertEntityToResponseDTO(AdmissionProcess admissionProcess) {
         return modelMapper.map(admissionProcess, AdmissionProcessResponseDTO.class);
+    }
+
+    public AdmissionProcessAdmitResponseDTO convertEntityToAdmitResponseDTO(AdmissionProcess admissionProcess) {
+        return modelMapper.map(admissionProcess, AdmissionProcessAdmitResponseDTO.class);
     }
 
     public List<AdmissionProcessResponseDTO> convertToListDTO(List<AdmissionProcess> admissions) {
