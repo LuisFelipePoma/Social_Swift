@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.socialswift.api.model.dto.AdmissionProcessAdmitResponseDTO;
 import com.socialswift.api.model.dto.AdmissionProcessCreateRequestDTO;
 import com.socialswift.api.model.dto.AdmissionProcessResponseDTO;
 import com.socialswift.api.service.AdmissionProcessService;
@@ -57,8 +58,8 @@ public class AdmissionProcessController {
 
     // Pending to test
     @PutMapping("/{id}/admit")
-    public ResponseEntity<AdmissionProcessResponseDTO> admitAdmissionProcess(@PathVariable Long id) {
-        AdmissionProcessResponseDTO admission = admissionProcessService.admitAdmissionProcess(id);
+    public ResponseEntity<AdmissionProcessAdmitResponseDTO> admitAdmissionProcess(@PathVariable Long id) {
+        AdmissionProcessAdmitResponseDTO admission = admissionProcessService.admitAdmissionProcess(id);
         return new ResponseEntity<>(admission, HttpStatus.OK);
     }
 

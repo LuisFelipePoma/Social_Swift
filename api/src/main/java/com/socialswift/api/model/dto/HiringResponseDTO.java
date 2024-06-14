@@ -16,7 +16,7 @@ public class HiringResponseDTO {
     private LocalDate endDate;
     private String position;
     private BigDecimal salary;
-    private BigDecimal state;
+    private String state;
     private CompanyResponseDTO company;
     private PersonResponseDTO person;
 }

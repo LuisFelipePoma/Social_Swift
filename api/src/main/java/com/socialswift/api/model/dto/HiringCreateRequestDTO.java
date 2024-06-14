@@ -15,7 +15,6 @@ public class HiringCreateRequestDTO {
     private LocalDate endDate;
     private String position;
     private BigDecimal salary;
-    private BigDecimal state;
     private Long company;
     private Long person;
 }

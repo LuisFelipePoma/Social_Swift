@@ -7,8 +7,11 @@ import org.springframework.stereotype.Service;
 import com.socialswift.api.exception.ResourceDuplicateException;
 import com.socialswift.api.exception.ResourceNotFoundException;
 import com.socialswift.api.mapper.AdmissionProcessMapper;
+import com.socialswift.api.model.dto.AdmissionProcessAdmitResponseDTO;
 import com.socialswift.api.model.dto.AdmissionProcessCreateRequestDTO;
 import com.socialswift.api.model.dto.AdmissionProcessResponseDTO;
+import com.socialswift.api.model.dto.HiringCreateRequestDTO;
+import com.socialswift.api.model.dto.HiringResponseDTO;
 import com.socialswift.api.model.entity.AdmissionProcess;
 import com.socialswift.api.model.entity.HiringNeed;
 import com.socialswift.api.model.entity.Person;
@@ -26,6 +29,8 @@ public class AdmissionProcessService {
 	private final AdmissionProcessRepository admissionProcessRepository;
 	private final PersonRepository personRepository;
 	private final HiringNeedRepository hiringNeedRepository;
+
+	private final HiringService hiringService;
 
 	public AdmissionProcessResponseDTO getById(Long id) {
 		AdmissionProcess admission = admissionProcessRepository.findById(id)
@@ -81,15 +86,28 @@ public class AdmissionProcessService {
 		return admissionProcessMapper.convertToListDTO(admissions);
 	}
 
-	public AdmissionProcessResponseDTO admitAdmissionProcess(Long id) {
+	public AdmissionProcessAdmitResponseDTO admitAdmissionProcess(Long id) {
 		AdmissionProcess admission = admissionProcessRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Admission Process not found"));
 
 		admission.setState("Admitted");
 		admission = admissionProcessRepository.save(admission);
-		// Implement the addition to hirings
 
-		return admissionProcessMapper.convertEntityToResponseDTO(admission);
+		HiringNeed hiringNeed = admission.getHiringNeed();
+		
+		HiringCreateRequestDTO hiring = new HiringCreateRequestDTO();
+		hiring.setStartDate(hiringNeed.getStartDate());
+		hiring.setEndDate(hiringNeed.getEndDate());
+		hiring.setPosition(hiringNeed.getPosition());
+		hiring.setSalary(hiringNeed.getSalary());
+		hiring.setCompany(hiringNeed.getCompany().getId());
+		hiring.setPerson(admission.getPerson().getId());
+
+		HiringResponseDTO hiringResponseDTO = hiringService.createHiring(hiring);
+
+		AdmissionProcessAdmitResponseDTO responseDTO = admissionProcessMapper.convertEntityToAdmitResponseDTO(admission);
+		responseDTO.setHiring(hiringResponseDTO);
+		return responseDTO;
 	}
 
 	public AdmissionProcessResponseDTO rejectAdmissionProcess(Long id) {
