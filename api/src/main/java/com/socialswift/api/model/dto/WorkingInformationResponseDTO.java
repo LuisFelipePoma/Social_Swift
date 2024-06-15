@@ -13,7 +13,6 @@ public class WorkingInformationResponseDTO {
     private Long id;
     private String position;
     private String educationLevel;
-    private String contracType;
     private Boolean certification;
     private Boolean experience;
     private String contactPhoneReference;

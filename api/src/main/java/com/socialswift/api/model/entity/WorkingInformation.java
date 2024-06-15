@@ -34,9 +34,6 @@ public class WorkingInformation {
     @Column(name = "education_level", nullable = false)
     private String educationLevel;
 
-    @Column(name = "contract_type", nullable = false)
-    private String contractType;
-
     @Column(name = "certification", nullable = false)
     private Boolean certification;
 
