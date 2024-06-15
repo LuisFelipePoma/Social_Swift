@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   db:
-    build: ./api/docker
+    build: ./db
     ports:
         - 1433:1433
     container_name: social-db
@@ -10,6 +10,23 @@ services:
       - db-data:/var/opt/mssql
     networks:
       - backend
+  api:
+    build: ./api
+    ports:
+        - 8080:8080
+    container_name: social-api
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:sqlserver://social-db:1433;databaseName=socialswiftdb;encrypt=true;trustServerCertificate=true;
+      # SPRING_DATASOURCE_USERNAME: dev
+      # SPRING_DATASOURCE_PASSWORD: admin_123_admin
+      # SERVER_SERVLET_CONTEXT_PATH: /api/v1
+      # SPRING_JPA_SHOW_SQL: "true"
+      # SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: "true"
+      # SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
+      # SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.SQLServerDialect
+    networks:
+      - backend
+  # front: TODO
 
 volumes:
   db-data:

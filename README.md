@@ -2,6 +2,12 @@
 
 ## Docker Compose
 
+Primero ejecutar, para construir la aplicacion de `api/`
+
+```bash
+mvn clean package
+```
+
 Levantar toda la app.
 
 ```bash
