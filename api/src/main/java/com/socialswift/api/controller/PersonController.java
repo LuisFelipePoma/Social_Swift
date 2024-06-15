@@ -40,6 +40,12 @@ public class PersonController {
         return new ResponseEntity<>(person, HttpStatus.OK);
     }
 
+    @GetMapping("/blacklists")
+    public ResponseEntity<List<PersonResponseDTO>> getBlackList() {
+        List<PersonResponseDTO> people = personService.getBlackList();
+        return new ResponseEntity<>(people, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<PersonCreateResponseDTO> createPerson (@Validated @RequestBody PersonCreateRequestDTO personCreateRequestDTO) {
         PersonCreateResponseDTO person = personService.createPerson(personCreateRequestDTO);
@@ -49,6 +55,12 @@ public class PersonController {
     @PutMapping("/{id}")
     public ResponseEntity<PersonCreateResponseDTO> updatePerson (@PathVariable Long id, @Validated @RequestBody PersonUpdateRequestDTO personUpdateRequestDTO) {
         PersonCreateResponseDTO person = personService.updatePerson(id, personUpdateRequestDTO);
+        return new ResponseEntity<>(person, HttpStatus.OK);
+    }
+
+    @PutMapping("/blacklists/{id}")
+    public ResponseEntity<PersonResponseDTO> moveToBlackList(@PathVariable Long id) {
+        PersonResponseDTO person = personService.moveToBlackList(id);
         return new ResponseEntity<>(person, HttpStatus.OK);
     }
 

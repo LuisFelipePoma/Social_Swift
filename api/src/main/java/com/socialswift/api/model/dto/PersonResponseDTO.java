@@ -20,4 +20,5 @@ public class PersonResponseDTO {
     private String email;
     private byte[] picture;
     private WorkingInformationResponseDTO workingInformation;
+    private Boolean blackList;
 }
