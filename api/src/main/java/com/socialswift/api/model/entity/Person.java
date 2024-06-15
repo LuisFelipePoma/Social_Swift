@@ -47,4 +47,7 @@ public class Person {
     @Column(name = "picture", nullable = false)
     @Lob
     private byte[] picture;
+
+    @Column(name = "black_list", nullable = false)
+    private Boolean blackList;
 }
