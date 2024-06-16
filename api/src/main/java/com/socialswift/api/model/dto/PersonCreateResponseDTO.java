@@ -19,4 +19,5 @@ public class PersonCreateResponseDTO {
     private String phoneNumber;
     private String email;
     private byte[] picture;
+    private Boolean blackList;
 }

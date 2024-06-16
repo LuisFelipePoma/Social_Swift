@@ -53,6 +53,12 @@ public class PersonService {
         return personResponseDTO;
     }
 
+    public List<PersonResponseDTO> getBlackList() {
+        List<Person> people = personRepository.findAllByBlackList(true);
+
+        return personMapper.convertToListResponseDTO(people);
+    }
+
     public PersonCreateResponseDTO createPerson (PersonCreateRequestDTO personCreateRequestDTO) {
         if (personRepository.findByDni(personCreateRequestDTO.getDni()).isPresent())
             throw new ResourceDuplicateException("DNI already registered");
@@ -61,7 +67,7 @@ public class PersonService {
             throw new ResourceDuplicateException("Phone number already registered.");
         
         Person person = personMapper.convertPersonCreateDTOToEntity(personCreateRequestDTO);
-
+        person.setBlackList(false);
         person = personRepository.save(person);
 
         return personMapper.convertPersonToPersonCreateDTO(person);
@@ -84,6 +90,15 @@ public class PersonService {
         Person person = personRepository.findById(id)
                     .orElseThrow(() -> new ResourceNotFoundException("Person not found"));
         
+        return personMapper.convertPersonToResponseDTO(person);
+    }
+
+    public PersonResponseDTO moveToBlackList(Long id) {
+        Person person = personRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Person not found"));
+
+        person.setBlackList(true);
+        person = personRepository.save(person);
         return personMapper.convertPersonToResponseDTO(person);
     }
 
