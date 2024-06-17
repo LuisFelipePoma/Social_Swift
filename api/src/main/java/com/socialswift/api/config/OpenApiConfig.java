@@ -30,8 +30,8 @@ public class OpenApiConfig {
         // Información de contacto
         Contact contact = new Contact();
         contact.setEmail("u202110764@upc.edu.pe");
-        contact.setName("CodeLace");
-        contact.setUrl("https://codelaceco.netlify.app/");
+        contact.setName("SocialSwift");
+        contact.setUrl("https://socialswift.netlify.app/");
         
 
         // Licencia
@@ -39,11 +39,11 @@ public class OpenApiConfig {
 
         // Información general de la API
         Info info = new Info()
-                .title("CodeLace API")
+                .title("SocialSwift API")
                 .version("1.0")
                 .contact(contact)
                 .description("This API exposes endpoints.")
-                .termsOfService("https://www.codelace.com/terms")
+                .termsOfService("https://www.socialswift.com/terms")
                 .license(mitLicense);
 
 
