@@ -1,0 +1,10 @@
+<mat-dialog-content>
+  <p>{{data.person.name}},{{data.person.lastname}}</p>
+  <mat-form-field>
+    <mat-label>Favorite Animal</mat-label>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Regresar</button>
+  <button mat-button  cdkFocusInitial>Ok</button>
+</mat-dialog-actions>

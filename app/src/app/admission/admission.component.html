@@ -1,1 +1,13 @@
-<p>admission works!</p>
+<div class="content">
+	@for (item of admisionData; track $index) {
+	<div class="card" (click)="openDialog()">
+		<div class="card-header">
+			<h1>{{item.person.name}}</h1>
+			<h3>{{item.person.lastname}}</h3>
+		</div>
+		<img src="data:image/png;base64,{{item.person.picture}}" alt="">
+		<h3>{{item.state}}</h3>
+		<p>{{item.interviewDate}}</p>
+	</div>
+	}
+</div>
