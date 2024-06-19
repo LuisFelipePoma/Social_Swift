@@ -1,3 +1,5 @@
+import { InformationResponse } from "./working-information.interface";
+
 export interface PersonRequest {
     dni: string;
     name: string;
@@ -9,9 +11,8 @@ export interface PersonRequest {
     picture: string;
 }
 
-export interface PersonResponse {
+export interface PersonCreateResponse {
     id: number;
-    
     dni: string;
     name: string;
     lastname: string;
@@ -20,5 +21,19 @@ export interface PersonResponse {
     phoneNumber: string;
     email: string;
     picture: string;
+    blacklist: boolean;
+}
+
+export interface PersonResponse {
+    id: number;
+    dni: string;
+    name: string;
+    lastname: string;
+    birthDate: string;
+    address: string;
+    phoneNumber: string;
+    email: string;
+    picture: string;
+    workingInformation: InformationResponse;
     blacklist: boolean;
 }

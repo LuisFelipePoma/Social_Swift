@@ -1,1 +1,14 @@
-<p>person works!</p>
+<div class="company-personal-list">
+    <div class="hired-person-div" *ngFor="let item of peopleData" (click)="openDialog(item)">
+        <img src="data:image/png;base64,{{item.picture}}" alt="Person picture">
+        <div class="person-info-div">
+            <p><b>Nombre: </b>{{item.name}} {{item.lastname}}</p>
+            <p><b>DNI: </b>{{item.dni}}</p>
+            <p><b>Dirección: </b>{{item.address}}</p>
+            <p><b>Correo: </b>{{item.email}}</p>
+            <p><b>Teléfono: </b>S/. {{item.phoneNumber}}</p>
+            <p><b>Fecha de nacimiento: </b>{{item.birthDate}}</p>
+            <p><b>Vetado: </b>{{item.blacklist ? 'Sí' : 'No'}}</p>
+        </div>
+    </div>
+</div>
