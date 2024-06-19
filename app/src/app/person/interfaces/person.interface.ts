@@ -21,7 +21,7 @@ export interface PersonCreateResponse {
     phoneNumber: string;
     email: string;
     picture: string;
-    blacklist: boolean;
+    blackList: boolean;
 }
 
 export interface PersonResponse {
@@ -35,5 +35,5 @@ export interface PersonResponse {
     email: string;
     picture: string;
     workingInformation: InformationResponse;
-    blacklist: boolean;
+    blackList: boolean;
 }

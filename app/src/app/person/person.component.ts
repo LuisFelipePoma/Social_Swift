@@ -18,14 +18,18 @@ export class PersonComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-      this.personService.getAllPeople().subscribe({
-        next: people => {
-          this.peopleData = people;
-        },
-        error: error => {
-          console.error('Error al obtener personas', error);
-        }
-      });
+      this.getAllPeople();
+  }
+
+  getAllPeople() {
+    this.personService.getAllPeople().subscribe({
+      next: people => {
+        this.peopleData = people;
+      },
+      error: error => {
+        console.error('Error al obtener personas', error);
+      }
+    });
   }
 
   openDialog(person: PersonResponse): void {
@@ -35,6 +39,7 @@ export class PersonComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.getAllPeople();
       console.log('The dialog was closed');
     });
   }

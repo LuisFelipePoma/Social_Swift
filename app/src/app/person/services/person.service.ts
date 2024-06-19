@@ -41,5 +41,13 @@ export class PersonService {
       );
   }
 
-
+  moveToBlacklist(id: number): Observable<PersonResponse> {
+    return this.http.put<PersonResponse>(`${environment.apiURL}/people/blacklists/${id}`, null)
+      .pipe(
+        catchError((error: any) => {
+          console.error('Error al obtener persona', error);
+          throw error;
+        })
+      );
+  }
 }
