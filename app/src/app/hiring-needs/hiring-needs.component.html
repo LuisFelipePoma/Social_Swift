@@ -1,0 +1,11 @@
+<div class="content">
+    <div class="card" *ngFor="let item of needsData" (click)="selectNeed(item.id)">
+        <div class="card-header">
+          <h1>Compañía: {{ item.company.name }}</h1>
+          <h3>Puesto: {{ item.position }}</h3>
+          <h3>Cantidad: {{ item.amountPeople }}</h3>
+          <h3>Inicio: {{ item.startDate }}</h3>
+          <h3>Fin: {{ item.endDate }}</h3>
+        </div>
+    </div>
+</div>

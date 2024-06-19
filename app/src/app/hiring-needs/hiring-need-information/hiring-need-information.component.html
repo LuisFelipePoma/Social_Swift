@@ -1,0 +1,23 @@
+<div class="content">
+    <div class="header">
+        <div class="company-information-div">
+            <h1><b>Compañía: </b>{{need?.company?.name}}</h1>
+            <h1><b>Puesto: </b>{{need?.position}}</h1>
+            <h1><b>Cantidad: </b>{{need?.amountPeople}}</h1>
+            <h1><b>Inicio: </b>{{need?.startDate}}</h1>
+            <h1><b>Fin: </b>{{need?.endDate}}</h1>
+            <p><b>¿Certificación requerida? </b>{{ need?.certification ? 'Sí' : 'No'}}</p>
+            <p><b>¿Experiencia requerida? </b>{{ need?.experience ? 'Sí' : 'No'}}</p>
+            <p><b>Salario: </b>{{ need?.salary }}</p>
+            <p><b>Educación: </b>{{ need?.educationLevel }}</p>
+            <p><b>Tipo de contrato: </b>{{ need?.contractType }}</p>
+            <p><b>Estado: </b>{{ need?.state }}</p>
+        </div>
+        <div class="button-div">
+            <button>Personas</button>
+        </div>
+    </div>
+    <div class="admission-title">
+        <h2>Personal a procesar</h2>
+    </div>
+</div>

@@ -4,12 +4,15 @@
     padding: 1rem;
     align-items: center;
     box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 
 .nav-brand {
     h1{
         margin: 0;
-        color: rgb(7, 99, 99);
+        color: #03bb85;
     }
 }
 
@@ -17,7 +20,7 @@ nav {
     a {
         margin-left: 1rem;
         text-decoration: none;
-        color: rgb(7, 99, 99);
+        color: #03bb85;
         font-weight: 500;
         padding: 1rem;
         border-radius: 8px;
@@ -25,7 +28,7 @@ nav {
     }
 
     a:hover {
-        background-color: rgb(7, 99, 99);
+        background-color: #03bb85;
         color: #FFFFFF;
     }
 }
