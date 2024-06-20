@@ -3,6 +3,8 @@ import { PersonResponse } from './interfaces/person.interface';
 import { PersonService } from './services/person.service';
 import { MatDialog } from '@angular/material/dialog'
 import { DialogInformationComponent } from './dialog-information/dialog-information.component';
+import { DialogCreatePersonComponent } from './dialog-create-person/dialog-create-person.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-person',
@@ -14,7 +16,8 @@ export class PersonComponent implements OnInit {
 
   constructor(
     private personService:PersonService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
@@ -41,6 +44,23 @@ export class PersonComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.getAllPeople();
       console.log('The dialog was closed');
+    });
+  }
+
+  createPerson(): void {
+    const dialogRef = this.dialog.open(DialogCreatePersonComponent, {
+      width: '600px',
+    });
+
+    dialogRef.afterClosed().subscribe(createdPerson => {
+      if (createdPerson) {
+        this.peopleData.push(createdPerson);
+      }
+      this.snackBar.open('Usuario agregado', 'Cerrar', {
+        duration: 5000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'center'
+      });
     });
   }
 }
