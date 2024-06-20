@@ -6,6 +6,18 @@
     flex-wrap: wrap;
 }
 
+.header {
+    display: flex;
+    column-gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+}
+
+.custom-fab {
+    background-color: #03bb85;
+    color: white;
+}
+
 .hired-person-div {
     display: flex;
     img {

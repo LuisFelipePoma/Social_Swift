@@ -1,6 +1,7 @@
+import { PersonCreateResponse } from './../interfaces/person.interface';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { PersonResponse } from '../interfaces/person.interface';
+import { PersonRequest, PersonResponse } from '../interfaces/person.interface';
 import { environment } from '../../../environments/environment';
 import { Observable, catchError } from 'rxjs';
 
@@ -46,6 +47,17 @@ export class PersonService {
       .pipe(
         catchError((error: any) => {
           console.error('Error al obtener persona', error);
+          throw error;
+        })
+      );
+  }
+
+  createPerson(personRequest: PersonRequest): Observable<PersonCreateResponse> {
+    
+    return this.http.post<PersonCreateResponse>(`${environment.apiURL}/people`, personRequest)
+      .pipe(
+        catchError((error: any) => {
+          console.error('Error al crear persona', error);
           throw error;
         })
       );

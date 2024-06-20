@@ -8,6 +8,7 @@ import { MaterialModule } from './material/material.module';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [
     provideAnimationsAsync()
