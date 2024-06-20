@@ -23,10 +23,25 @@ export class AdmisionService {
       )
   }
 
-  rejectAdmisionById (admisionId: number): Observable<AdmisionResponse> {
+  rejectAdmissionById (admissionId: number): Observable<AdmisionResponse> {
     return this.http
-      .get<AdmisionResponse>(
-        `${environment.apiURL}/admissions/${admisionId}/reject`
+      .put<AdmisionResponse>(
+        `${environment.apiURL}/admissions/${admissionId}/reject`,
+        {}
+      )
+      .pipe(
+        catchError((error: any) => {
+          console.error('Error rejecting admission', error)
+          throw error
+        })
+      )
+  }
+
+  acceptAdmissionById (admisionId: number): Observable<AdmisionResponse> {
+    return this.http
+      .put<AdmisionResponse>(
+        `${environment.apiURL}/admissions/${admisionId}/admit`,
+        {}
       )
       .pipe(
         catchError((error: any) => {
@@ -35,17 +50,4 @@ export class AdmisionService {
         })
       )
   }
-
-	acceptAdmisionById (admisionId: number): Observable<AdmisionResponse> {
-		return this.http
-			.get<AdmisionResponse>(
-				`${environment.apiURL}/admissions/${admisionId}/admit`
-			)
-			.pipe(
-				catchError((error: any) => {
-					console.error('Error al obtener admisiones a procesar', error)
-					throw error
-				})
-			)
-	}
 }

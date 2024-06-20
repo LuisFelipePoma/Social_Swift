@@ -1,10 +1,24 @@
+<h2 mat-dialog-title>Ficha de Admision de {{data.person.name}}</h2>
 <mat-dialog-content>
-  <p>{{data.person.name}},{{data.person.lastname}}</p>
-  <mat-form-field>
-    <mat-label>Favorite Animal</mat-label>
-  </mat-form-field>
+	<img src="data:image/png;base64,{{data.person.picture}}" alt="{{data.person.name}}">
+
+	<p>Nombre completo : <span>{{data.person.name}}</span></p>
+	<p>DNI : <span>{{data.person.dni}}</span></p>
+	<p>Numero de celular: <span>{{data.person.phoneNumber}}</span></p>
+	<p>Correo electronico: <span>{{data.person.email}}</span></p>
+	<p>Fecha de nacimiento: <span>{{data.person.birthDate}}</span></p>
+	<p>Informacion de trabajo :
+		<span>
+			{{data.person.workingInformation ? data.person.workingInformation : 'No hay informacion de trabajo'}}
+		</span>
+	</p>
+	@if (data.person.blackList) {
+	<h2>Este usuario esta en la blacklist</h2>
+	}
+	<p></p>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Regresar</button>
-  <button mat-button  cdkFocusInitial>Ok</button>
+	<button mat-button mat-dialog-close>Regresar</button>
+	<button mat-button (click)="handleAdmision(true)">Admitir</button>
+	<button mat-button (click)="handleAdmision(false)">Rechazar</button>
 </mat-dialog-actions>

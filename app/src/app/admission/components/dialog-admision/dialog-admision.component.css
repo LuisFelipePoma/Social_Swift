@@ -1,0 +1,11 @@
+img{
+	/* center image*/
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	/* image size */
+	width: 150px;
+	height: auto;
+	border-radius: 50%;
+
+}

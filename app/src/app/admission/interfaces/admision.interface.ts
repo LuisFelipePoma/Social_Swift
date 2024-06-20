@@ -1,6 +1,8 @@
+import { PersonResponse } from "../../person/interfaces/person.interface"
+
 export interface AdmisionResponse {
   id: number
-  person: Person
+  person: PersonResponse
   hiringNeed: HiringNeed
   applicationDate: Date
   interviewDate: Date
@@ -39,19 +41,4 @@ export interface Company {
   contactName: string
   city: string
 }
-
-export interface Person {
-  id: number
-  dni: string
-  name: string
-  lastname: string
-  birthDate: Date
-  address: string
-  phoneNumber: string
-  email: string
-  picture: string
-  workingInformation: string
-  blackList: boolean
-}
-
 

@@ -1,9 +1,10 @@
-import { Component, inject, model } from '@angular/core'
+import { Component, inject } from '@angular/core'
 import { AdmisionResponse } from './interfaces/admision.interface'
 import { AdmisionService } from './services/admision.service'
 import { HiringNeedsService } from '../hiring-needs/services/hiring-needs.service'
 import { MatDialog } from '@angular/material/dialog'
 import { DialogAdmisionComponent } from './components/dialog-admision/dialog-admision.component'
+import { PersonResponse } from '../person/interfaces/person.interface'
 
 @Component({
   selector: 'app-admission',
@@ -37,16 +38,21 @@ export class AdmissionComponent {
     }
   }
 
-  openDialog (): void {
+  openDialog (person: PersonResponse): void {
     const dialogRef = this.dialog.open(DialogAdmisionComponent, {
-      data: this.admisionData
+      width: '600px',
+      data: { person }
     })
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed')
-      if (result !== undefined) {
-        this.admisionData = result
-        console.log('pov')
+      if (result !== undefined && result !== "") {
+				console.log(result)
+        // Update the value
+        const index = this.admisionData.findIndex(
+          admision => admision.person.id === person.id
+        )
+        this.admisionData[index].state = result
       }
     })
   }
