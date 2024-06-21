@@ -61,7 +61,7 @@
     </mat-error>
 
     <div mat-dialog-actions>
-      <button mat-button [mat-dialog-close]="true">Cancel</button>
+      <button mat-button (click)="close()">Cancel</button>
       <button mat-button type="submit" [disabled]="form.invalid">Create</button>
     </div>
   </form>

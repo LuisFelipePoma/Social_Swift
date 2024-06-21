@@ -13,13 +13,15 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import { DialogCreateInformationComponent } from './dialog-create-information/dialog-create-information.component';
 
 
 @NgModule({
   declarations: [
     PersonComponent,
     DialogInformationComponent,
-    DialogCreatePersonComponent
+    DialogCreatePersonComponent,
+    DialogCreateInformationComponent
   ],
   imports: [
     CommonModule,

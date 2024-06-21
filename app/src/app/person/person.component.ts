@@ -53,14 +53,21 @@ export class PersonComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(createdPerson => {
+      console.log(createdPerson);
       if (createdPerson) {
-        this.peopleData.push(createdPerson);
+        this.peopleData.push(createdPerson); // Add the new person to the array
+        this.snackBar.open('Usuario agregado', 'Cerrar', {
+            duration: 5000,
+            verticalPosition: 'bottom',
+            horizontalPosition: 'center'
+        });
+      } else {
+          this.snackBar.open('No se agregó ningún usuario', 'Cerrar', {
+              duration: 5000,
+              verticalPosition: 'bottom',
+              horizontalPosition: 'center'
+          });
       }
-      this.snackBar.open('Usuario agregado', 'Cerrar', {
-        duration: 5000,
-        verticalPosition: 'bottom',
-        horizontalPosition: 'center'
-      });
     });
   }
 }

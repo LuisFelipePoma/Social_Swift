@@ -75,6 +75,10 @@ export class DialogCreatePersonComponent {
     });
   }
 
+  close(): void {
+    this.dialogRef.close(false);
+  }
+
   getFile(event: any) {
     this.file = event.target.files[0];
     console.log('file', this.file);
