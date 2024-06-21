@@ -10,5 +10,6 @@ import com.socialswift.api.model.entity.WorkingInformation;
 public interface WorkingInformationRepository extends JpaRepository<WorkingInformation, Long> {
     Optional<WorkingInformation> findById(Optional<Long> id);
     Optional<WorkingInformation> findByPerson(Person person);
-    
+	// Find by person id
+	Optional<WorkingInformation> findByPersonId(Long personId);   
 }

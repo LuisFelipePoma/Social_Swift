@@ -18,15 +18,12 @@ export class AdmissionComponent {
   readonly dialog = inject(MatDialog)
   constructor (
     private admisionService: AdmisionService,
-    private hiringNeedsService: HiringNeedsService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit (): void {
-    // const selectedHiring: number | null = this.hiringNeedsService.selectedNeed
-
-    const selectedNeedId = this.route.snapshot.queryParamMap.get('need');
-    if(selectedNeedId !== null && !isNaN(+selectedNeedId)) {
+    const selectedNeedId = this.route.snapshot.queryParamMap.get('need')
+    if (selectedNeedId !== null && !isNaN(+selectedNeedId)) {
       this.admisionService.getAllAdmisionsById(+selectedNeedId).subscribe({
         next: admisions => {
           this.admisionData = admisions
@@ -49,8 +46,8 @@ export class AdmissionComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed')
-      if (result !== undefined && result !== "") {
-				console.log(result)
+      if (result !== undefined && result !== '') {
+        console.log(result)
         // Update the value
         const index = this.admisionData.findIndex(
           admision => admision.person.id === person.id

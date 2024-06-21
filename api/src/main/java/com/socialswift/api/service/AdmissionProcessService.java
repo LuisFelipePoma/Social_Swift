@@ -7,17 +7,21 @@ import org.springframework.stereotype.Service;
 import com.socialswift.api.exception.ResourceDuplicateException;
 import com.socialswift.api.exception.ResourceNotFoundException;
 import com.socialswift.api.mapper.AdmissionProcessMapper;
+import com.socialswift.api.mapper.WorkingInformationMapper;
 import com.socialswift.api.model.dto.AdmissionProcessAdmitResponseDTO;
 import com.socialswift.api.model.dto.AdmissionProcessCreateRequestDTO;
 import com.socialswift.api.model.dto.AdmissionProcessResponseDTO;
 import com.socialswift.api.model.dto.HiringCreateRequestDTO;
 import com.socialswift.api.model.dto.HiringResponseDTO;
+import com.socialswift.api.model.dto.WorkingInformationResponseDTO;
 import com.socialswift.api.model.entity.AdmissionProcess;
 import com.socialswift.api.model.entity.HiringNeed;
 import com.socialswift.api.model.entity.Person;
+import com.socialswift.api.model.entity.WorkingInformation;
 import com.socialswift.api.repository.AdmissionProcessRepository;
 import com.socialswift.api.repository.HiringNeedRepository;
 import com.socialswift.api.repository.PersonRepository;
+import com.socialswift.api.repository.WorkingInformationRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -29,6 +33,8 @@ public class AdmissionProcessService {
 	private final AdmissionProcessRepository admissionProcessRepository;
 	private final PersonRepository personRepository;
 	private final HiringNeedRepository hiringNeedRepository;
+	private final WorkingInformationRepository workingInformationRepository;
+	private final WorkingInformationMapper informationMapper;
 
 	private final HiringService hiringService;
 
@@ -51,7 +57,17 @@ public class AdmissionProcessService {
 		List<AdmissionProcess> admissions = admissionProcessRepository
 				.findAllByHiringNeedOrderByStateAscApplicationDateAsc(hiringNeed);
 
-		return admissionProcessMapper.convertToListDTO(admissions);
+		List<AdmissionProcessResponseDTO> response = admissionProcessMapper.convertToListDTO(admissions);
+		response.stream().forEach(admision -> {
+			WorkingInformation information = workingInformationRepository.findByPersonId(admision.getPerson().getId())
+					.orElse(null);
+			if (information == null)
+				return;
+			admision.getPerson().setWorkingInformation(
+					informationMapper.convertWorkingInformationToDTO(information));
+		});
+
+		return response;
 	}
 
 	public AdmissionProcessResponseDTO createAdmission(
@@ -94,7 +110,7 @@ public class AdmissionProcessService {
 		admission = admissionProcessRepository.save(admission);
 
 		HiringNeed hiringNeed = admission.getHiringNeed();
-		
+
 		HiringCreateRequestDTO hiring = new HiringCreateRequestDTO();
 		hiring.setStartDate(hiringNeed.getStartDate());
 		hiring.setEndDate(hiringNeed.getEndDate());
@@ -105,7 +121,8 @@ public class AdmissionProcessService {
 
 		HiringResponseDTO hiringResponseDTO = hiringService.createHiring(hiring);
 
-		AdmissionProcessAdmitResponseDTO responseDTO = admissionProcessMapper.convertEntityToAdmitResponseDTO(admission);
+		AdmissionProcessAdmitResponseDTO responseDTO = admissionProcessMapper
+				.convertEntityToAdmitResponseDTO(admission);
 		responseDTO.setHiring(hiringResponseDTO);
 		return responseDTO;
 	}

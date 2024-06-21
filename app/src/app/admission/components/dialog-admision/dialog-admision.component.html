@@ -9,7 +9,8 @@
 	<p>Fecha de nacimiento: <span>{{data.person.birthDate}}</span></p>
 	<p>Informacion de trabajo :
 		<span>
-			{{data.person.workingInformation ? data.person.workingInformation : 'No hay informacion de trabajo'}}
+			{{data.person.workingInformation ? data.person.workingInformation.position
+			: 'No hay informacion de trabajo'}}
 		</span>
 	</p>
 	@if (data.person.blackList) {
