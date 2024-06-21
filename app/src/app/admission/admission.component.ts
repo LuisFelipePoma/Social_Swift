@@ -5,6 +5,7 @@ import { HiringNeedsService } from '../hiring-needs/services/hiring-needs.servic
 import { MatDialog } from '@angular/material/dialog'
 import { DialogAdmisionComponent } from './components/dialog-admision/dialog-admision.component'
 import { PersonResponse } from '../person/interfaces/person.interface'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-admission',
@@ -17,14 +18,16 @@ export class AdmissionComponent {
   readonly dialog = inject(MatDialog)
   constructor (
     private admisionService: AdmisionService,
-    private hiringNeedsService: HiringNeedsService
+    private hiringNeedsService: HiringNeedsService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit (): void {
-    const selectedHiring: number | null = this.hiringNeedsService.selectedNeed
+    // const selectedHiring: number | null = this.hiringNeedsService.selectedNeed
 
-    if (typeof selectedHiring === 'number') {
-      this.admisionService.getAllAdmisionsById(selectedHiring).subscribe({
+    const selectedNeedId = this.route.snapshot.queryParamMap.get('need');
+    if(selectedNeedId !== null && !isNaN(+selectedNeedId)) {
+      this.admisionService.getAllAdmisionsById(+selectedNeedId).subscribe({
         next: admisions => {
           this.admisionData = admisions
           console.log(this.admisionData)

@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 })
 export class HiringNeedsService {
 
-  private sessionStorageKey = 'selectedNeedId';
+  // private sessionStorageKey = 'selectedNeedId';
 
   constructor(private http: HttpClient) { }
 
@@ -33,16 +33,16 @@ export class HiringNeedsService {
       );
   }
 
-  set selectedNeedData(id: number) {
-    sessionStorage.setItem(this.sessionStorageKey, id.toString());
-  }
+  // set selectedNeedData(id: number) {
+  //   sessionStorage.setItem(this.sessionStorageKey, id.toString());
+  // }
 
-  get selectedNeed(): number | null {
-    const storedId = sessionStorage.getItem(this.sessionStorageKey);
-    return storedId ? parseInt(storedId, 10) : null;
-  }
+  // get selectedNeed(): number | null {
+  //   const storedId = sessionStorage.getItem(this.sessionStorageKey);
+  //   return storedId ? parseInt(storedId, 10) : null;
+  // }
 
-  clearSelectedNeedId(){
-    sessionStorage.removeItem(this.sessionStorageKey);
-  }
+  // clearSelectedNeedId(){
+  //   sessionStorage.removeItem(this.sessionStorageKey);
+  // }
 }

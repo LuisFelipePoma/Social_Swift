@@ -38,8 +38,8 @@ export class HiringNeedsComponent implements OnInit{
   }
 
   selectNeed(needId: number) {
-    this.hiringNeedsService.selectedNeedData = needId;
+    // this.hiringNeedsService.selectedNeedData = needId;
     console.log(`id: ${needId}`);
-    this.router.navigate(['hiring-needs/information']);
+    this.router.navigate(['hiring-needs/information'], { queryParams: { need: needId } });
   }
 }
