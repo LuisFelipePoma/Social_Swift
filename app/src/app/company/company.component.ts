@@ -28,8 +28,7 @@ export class CompanyComponent implements OnInit{
   }
 
   selectCompany(companyId: number) {
-    this.companyService.selectedCompanyData = companyId;
     console.log(`id: ${companyId}`);
-    this.router.navigate(['company']);
+    this.router.navigate(['company'], { queryParams: { company: companyId } });
   }
 }

@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { HiringResponse } from './interfaces/hiring.interface';
 import { HiringService } from './services/hiring.service';
@@ -14,18 +15,21 @@ export class HiringComponent implements OnInit{
   constructor(
     private hiringService: HiringService,
     private companyService: CompanyService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    const selectedCompanyId = this.companyService.selectedCompany;
-    if (typeof selectedCompanyId === 'number') {
-      this.hiringService.getOKHirings(selectedCompanyId).subscribe({
+    // const selectedCompanyId = this.companyService.selectedCompany;
+    const selectedCompanyId = this.route.snapshot.queryParamMap.get('company');
+    console.log(selectedCompanyId);
+    if (selectedCompanyId !== null && !isNaN(+selectedCompanyId)) {
+      this.hiringService.getOKHirings(+selectedCompanyId).subscribe({
         next: hirings => {
           this.hiringsData = hirings;
           console.log(this.hiringsData);
         },
         error: error => {
-          console.error('Error al obtener contrataciones');
+          console.error('Error al obtener contrataciones', error);
         }
       });
     } else {

@@ -9,7 +9,7 @@ import { BehaviorSubject, Observable, catchError } from 'rxjs';
 })
 export class CompanyService {
 
-  private sessionStorageKey = 'selectedCompanyId';
+  // private sessionStorageKey = 'selectedCompanyId';
 
   constructor(private http: HttpClient) { }
 
@@ -43,16 +43,16 @@ export class CompanyService {
       );
   }
 
-  set selectedCompanyData(id: number) {
-    sessionStorage.setItem(this.sessionStorageKey, id.toString());
-  }
+  // set selectedCompanyData(id: number) {
+  //   sessionStorage.setItem(this.sessionStorageKey, id.toString());
+  // }
 
-  get selectedCompany(): number | null {
-    const storedId = sessionStorage.getItem(this.sessionStorageKey);
-    return storedId ? parseInt(storedId, 10) : null;
-  }
+  // get selectedCompany(): number | null {
+  //   const storedId = sessionStorage.getItem(this.sessionStorageKey);
+  //   return storedId ? parseInt(storedId, 10) : null;
+  // }
 
-  clearSelectedCompanyId() {
-    sessionStorage.removeItem(this.sessionStorageKey);
-  }
+  // clearSelectedCompanyId() {
+  //   sessionStorage.removeItem(this.sessionStorageKey);
+  // }
 }

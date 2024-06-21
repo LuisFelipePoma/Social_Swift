@@ -14,7 +14,7 @@
             <p><b>Ciudad: </b>{{company?.city}}</p>
         </div>
         <div class="button-div">
-            <button routerLink="/hiring-needs" routerLinkActive="active">Avisos de contratación</button>
+            <button (click)="goToHiringNeeds(company?.id ?? 0)">Avisos de contratación</button>
             <button>Contrataciones suspendidas</button>
         </div>
     </div>
