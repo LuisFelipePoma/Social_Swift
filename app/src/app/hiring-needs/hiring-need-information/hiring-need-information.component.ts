@@ -38,8 +38,8 @@ export class HiringNeedInformationComponent implements OnInit {
 
   showdialog (): void {
     const dialogRef = this.dialog.open(DialogFilterComponent, {
-      width: '750px',
-      height: '500px'
+      width: '1000px',
+      height: '650px'
     })
 
     dialogRef.afterClosed().subscribe(result => {

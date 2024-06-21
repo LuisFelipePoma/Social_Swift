@@ -1,22 +1,29 @@
 <h2 mat-dialog-title>Ficha de Admision de {{data.person.name}}</h2>
 <mat-dialog-content>
 	<img src="data:image/png;base64,{{data.person.picture}}" alt="{{data.person.name}}">
-
-	<p>Nombre completo : <span>{{data.person.name}}</span></p>
-	<p>DNI : <span>{{data.person.dni}}</span></p>
-	<p>Numero de celular: <span>{{data.person.phoneNumber}}</span></p>
-	<p>Correo electronico: <span>{{data.person.email}}</span></p>
-	<p>Fecha de nacimiento: <span>{{data.person.birthDate}}</span></p>
-	<p>Informacion de trabajo :
-		<span>
-			{{data.person.workingInformation ? data.person.workingInformation.position
-			: 'No hay informacion de trabajo'}}
-		</span>
-	</p>
-	@if (data.person.blackList) {
-	<h2>Este usuario esta en la blacklist</h2>
-	}
 	<p></p>
+	<h3>Información personal</h3>
+	<p><b>DNI: </b>{{data.person.dni}}</p>
+	<p><b>Dirección: </b>{{data.person.address}}</p>
+	<p><b>Correo: </b>{{data.person.email}}</p>
+	<p><b>Teléfono: </b>S/. {{data.person.phoneNumber}}</p>
+	<p><b>Fecha de nacimiento: </b>{{data.person.birthDate}}</p>
+	<p><b>Vetado: </b>{{data.person.blackList ? 'Sí' : 'No'}}</p>
+	<br>
+	<h3>Información laboral</h3>
+	@if (data.person.workingInformation) {
+	<p><b>Posición: </b>{{data.person.workingInformation.position}}</p>
+	<p><b>Nivel de educación: </b>{{data.person.workingInformation.educationLevel}}</p>
+	<p><b>¿Tiene certificación? </b>{{data.person.workingInformation.certification ? 'Sí' : 'No'}}</p>
+	<p><b>¿Tiene experiencia? </b>{{data.person.workingInformation.experience ? 'Sí' : 'No'}}</p>
+	<p><b>Teléfono de contacto de referencia: </b>{{data.person.workingInformation.contactPhoneReference}}</p>
+	<p><b>Información de contacto: </b>{{data.person.workingInformation.contactPhoneReference}}</p>
+	<p><b>Teléfono de contacto de referencia: </b>{{data.person.workingInformation.contactPhoneReference}}</p>
+	<p><b>Fecha de registro: </b>{{data.person.workingInformation.registrationDate}}</p>
+	<p><b>Hoja de vida: </b><a href="{{data.person.workingInformation.cvUrl}}">{{data.person.workingInformation.cvUrl}}</a></p>
+	}@else {
+	<p>No disponible</p>
+	}
 </mat-dialog-content>
 <mat-dialog-actions>
 	<button mat-button mat-dialog-close>Regresar</button>

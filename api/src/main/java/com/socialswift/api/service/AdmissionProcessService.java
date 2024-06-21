@@ -13,7 +13,6 @@ import com.socialswift.api.model.dto.AdmissionProcessCreateRequestDTO;
 import com.socialswift.api.model.dto.AdmissionProcessResponseDTO;
 import com.socialswift.api.model.dto.HiringCreateRequestDTO;
 import com.socialswift.api.model.dto.HiringResponseDTO;
-import com.socialswift.api.model.dto.WorkingInformationResponseDTO;
 import com.socialswift.api.model.entity.AdmissionProcess;
 import com.socialswift.api.model.entity.HiringNeed;
 import com.socialswift.api.model.entity.Person;

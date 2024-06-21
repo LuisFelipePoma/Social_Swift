@@ -1,18 +1,26 @@
-<div class="content">
-	<ng-container *ngIf="(admisionData | pipeAdmisions) as filteredData">
-		<div *ngIf="filteredData.length > 0; else noData">
-		  <div class="card" *ngFor="let item of filteredData; trackBy: trackByFn">
-			<div class="card-header">
-			  <h1>{{item.person.name}}</h1>
-			  <h3>{{item.person.lastname}}</h3>
+<h2 mat-dialog-title>Reclutas que cumplen los requisitos</h2>
+<mat-dialog-content>
+
+	<div class="content">
+		<ng-container *ngIf="(admisionData | pipeAdmisions) as filteredData">
+			<div *ngIf="filteredData.length > 0; else noData">
+				<div class="card" *ngFor="let item of filteredData; trackBy: trackByFn">
+					<div class="card-header">
+						<h1>{{item.person.name}}</h1>
+						<h3>{{item.person.lastname}}</h3>
+					</div>
+					<img src="data:image/png;base64,{{item.person.picture}}" alt="">
+					<h3>{{item.state}}</h3>
+					<p>{{item.interviewDate}}</p>
+				</div>
 			</div>
-			<img src="data:image/png;base64,{{item.person.picture}}" alt="">
-			<h3>{{item.state}}</h3>
-			<p>{{item.interviewDate}}</p>
-		  </div>
-		</div>
-		<ng-template #noData>
-		  <p>No hay elementos.</p>
-		</ng-template>
-	  </ng-container>
-</div>
+			<ng-template #noData>
+				<p>No hay elementos.</p>
+			</ng-template>
+		</ng-container>
+	</div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+	<button mat-button mat-dialog-close>Regresar</button>
+</mat-dialog-actions>
