@@ -1,8 +1,9 @@
 import { PersonService } from './../services/person.service';
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { InformationService } from '../services/information.service';
+import { PersonResponse } from '../interfaces/person.interface';
 
 @Component({
   selector: 'app-dialog-create-information',
@@ -13,19 +14,20 @@ export class DialogCreateInformationComponent {
   
   constructor(
     public dialogRef: MatDialogRef<DialogCreateInformationComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { createdPerson: PersonResponse },
     private informationService: InformationService,
     private fb: FormBuilder
   ) {}
 
+  person = this.data.createdPerson;
+
   form: FormGroup = this.fb.group({
-    person: [, [Validators.required]],
     position: [, [Validators.required]],
     educationLevel: [, [Validators.required]],
-    certification: [, [Validators.required]],
-    experience: [, [Validators.required]],
+    certification: [false],
+    experience: [false],
     contactPhoneReference: [, [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
     contactInformation: [, [Validators.required]],
-    registrationDate: [, [Validators.required]],
     cvUrl: [, [Validators.required]]
   });
 
@@ -43,18 +45,26 @@ export class DialogCreateInformationComponent {
       return;
     }
 
+    // get today date in string (ISO)
+    const today = new Date();
+    const todayString = today.toISOString();
+
     const formValue = this.form.value;
+
+    console.log('Persona agregada', this.person)
     const informationRequest = {
-      person: formValue.person,
+      person: this.person.id,
       position: formValue.position,
       educationLevel: formValue.educationLevel,
       certification: formValue.certification,
       experience: formValue.experience,
       contactPhoneReference: formValue.contactPhoneReference,
       contactInformation: formValue.contactInformation,
-      registrationDate: formValue.registrationDate,
+      registrationDate: todayString,
       cvUrl: formValue.cvUrl,
     };
+
+    console.log('Informacion por agregar', informationRequest)
 
     this.informationService.createInformation(informationRequest).subscribe({
       next: createdInformation => {
@@ -65,5 +75,9 @@ export class DialogCreateInformationComponent {
         console.error('Error creating information:', error);
       }
     });
+  }
+
+  close(): void {
+    this.dialogRef.close(false);
   }
 }

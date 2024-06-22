@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog'
 import { DialogInformationComponent } from './dialog-information/dialog-information.component';
 import { DialogCreatePersonComponent } from './dialog-create-person/dialog-create-person.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DialogCreateInformationComponent } from './dialog-create-information/dialog-create-information.component';
 
 @Component({
   selector: 'app-person',
@@ -56,17 +57,17 @@ export class PersonComponent implements OnInit {
       console.log(createdPerson);
       if (createdPerson) {
         this.peopleData.push(createdPerson); // Add the new person to the array
+        
+        const dialogCreateInfoRef = this.dialog.open(DialogCreateInformationComponent, {
+          width: '600px',
+          data: { createdPerson }
+        });
+
         this.snackBar.open('Usuario agregado', 'Cerrar', {
             duration: 5000,
             verticalPosition: 'bottom',
             horizontalPosition: 'center'
         });
-      } else {
-          this.snackBar.open('No se agregó ningún usuario', 'Cerrar', {
-              duration: 5000,
-              verticalPosition: 'bottom',
-              horizontalPosition: 'center'
-          });
       }
     });
   }

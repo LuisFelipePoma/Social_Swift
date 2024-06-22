@@ -7,12 +7,16 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { CompanyInformationComponent } from './company-information/company-information.component';
 import { HiringModule } from '../hiring/hiring.module';
+import { CanceledHiringsComponent } from './canceled-hirings/canceled-hirings.component';
+import { FinishedHiringsComponent } from './finished-hirings/finished-hirings.component';
 
 
 @NgModule({
   declarations: [
     CompanyComponent,
-    CompanyInformationComponent
+    CompanyInformationComponent,
+    CanceledHiringsComponent,
+    FinishedHiringsComponent
   ],
   imports: [
     CommonModule,

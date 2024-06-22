@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { DialogCreateInformationComponent } from './dialog-create-information/dialog-create-information.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { DialogCreateInformationComponent } from './dialog-create-information/di
     MatDatepickerModule,
     ReactiveFormsModule,
     MatNativeDateModule,
-    MatInputModule
+    MatInputModule,
+    MatCheckboxModule
   ]
 })
 export class PersonModule { }

@@ -15,7 +15,8 @@
         </div>
         <div class="button-div">
             <button (click)="goToHiringNeeds(company?.id ?? 0)">Avisos de contratación</button>
-            <button>Contrataciones suspendidas</button>
+            <button (click)="goToCanceledHirings(company?.id ?? 0)">Contrataciones suspendidas</button>
+            <button (click)="goToFinishedHirings(company?.id ?? 0)">Contrataciones finalizadas</button>
         </div>
     </div>
     <div class="hiring-title">
