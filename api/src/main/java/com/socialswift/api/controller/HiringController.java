@@ -39,6 +39,12 @@ public class HiringController {
         return new ResponseEntity<>(hirings, HttpStatus.OK);
     }
 
+    @GetMapping("/companies/{companyId}/finished")
+    public ResponseEntity<List<HiringResponseDTO>> getAllByCompanyAndStateFinished(@PathVariable Long companyId) {
+        List<HiringResponseDTO> hirings = hiringService.getAllByCompanyAndState(companyId, "finished");
+        return new ResponseEntity<>(hirings, HttpStatus.OK);
+    }
+
     @GetMapping("/people/{personId}")
     public ResponseEntity<List<HiringResponseDTO>> getAllByPerson(@PathVariable Long personId){
         List<HiringResponseDTO> hirings = hiringService.getAllByPerson(personId);
