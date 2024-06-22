@@ -2,16 +2,16 @@
 <mat-dialog-content>
 
 	<div class="content">
-		<ng-container *ngIf="(admisionData | pipeAdmisions) as filteredData">
+		<ng-container *ngIf="(admisionData | pipeAdmisions: data.need) as filteredData">
 			<div *ngIf="filteredData.length > 0; else noData">
-				<div class="card" *ngFor="let item of filteredData; trackBy: trackByFn">
+				<div class="card" *ngFor="let item of filteredData; trackBy: trackByFn" (click)="openDialogPersonInfo(item)">
 					<div class="card-header">
-						<h1>{{item.person.name}}</h1>
-						<h3>{{item.person.lastname}}</h3>
+						<h1>{{item.name}}</h1>
+						<h3>{{item.lastname}}</h3>
 					</div>
-					<img src="data:image/png;base64,{{item.person.picture}}" alt="">
-					<h3>{{item.state}}</h3>
-					<p>{{item.interviewDate}}</p>
+					<img src="data:image/png;base64,{{item.picture}}" alt="">
+					<h3>{{item.blackList}}</h3>
+					<p>{{item.email}}</p>
 				</div>
 			</div>
 			<ng-template #noData>

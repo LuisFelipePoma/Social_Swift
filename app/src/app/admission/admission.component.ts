@@ -38,10 +38,10 @@ export class AdmissionComponent {
     }
   }
 
-  openDialog (person: PersonResponse): void {
+  openDialog (person: PersonResponse, admissionProcess: number): void {
     const dialogRef = this.dialog.open(DialogAdmisionComponent, {
       width: '600px',
-      data: { person }
+      data: { person, admissionProcess}
     })
 
     dialogRef.afterClosed().subscribe(result => {

@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>{{data.person.name}} {{data.person.lastname}}</h2>
+<mat-dialog-content class="mat-typography">
+	<h3>Información data.personal</h3>
+	<p><b>DNI: </b>{{data.person.dni}}</p>
+	<p><b>Dirección: </b>{{data.person.address}}</p>
+	<p><b>Correo: </b>{{data.person.email}}</p>
+	<p><b>Teléfono: </b>S/. {{data.person.phoneNumber}}</p>
+	<p><b>Fecha de nacimiento: </b>{{data.person.birthDate}}</p>
+	<p><b>Vetado: </b>{{data.person.blackList ? 'Sí' : 'No'}}</p>
+	<br>
+	<h3>Información laboral</h3>
+	<p><b>Posición: </b>{{data.person.workingInformation.position}}</p>
+	<p><b>Nivel de educación: </b>{{data.person.workingInformation.educationLevel}}</p>
+	<p><b>¿Tiene certificación? </b>{{data.person.workingInformation.certification ? 'Sí' : 'No'}}</p>
+	<p><b>¿Tiene experiencia? </b>{{data.person.workingInformation.experience ? 'Sí' : 'No'}}</p>
+	<p><b>Teléfono de contacto de referencia: </b>{{data.person.workingInformation.contactPhoneReference}}</p>
+	<p><b>Información de contacto: </b>{{data.person.workingInformation.contactPhoneReference}}</p>
+	<p><b>Teléfono de contacto de referencia: </b>{{data.person.workingInformation.contactPhoneReference}}</p>
+	<p><b>Fecha de registro: </b>{{data.person.workingInformation.registrationDate}}</p>
+	<p><b>Hoja de vida: </b><a
+			href="{{data.person.workingInformation.cvUrl}}">{{data.person.workingInformation.cvUrl}}</a></p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+	<button mat-button mat-dialog-close cdkFocusInitial>Cerrar</button>
+	<button mat-button (click)="addPersonToAdmision(data.person)">Añadir al proceso</button>
+</mat-dialog-actions>

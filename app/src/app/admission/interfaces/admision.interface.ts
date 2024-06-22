@@ -1,4 +1,4 @@
-import { PersonResponse } from "../../person/interfaces/person.interface"
+import { PersonResponse } from '../../person/interfaces/person.interface'
 
 export interface AdmisionResponse {
   id: number
@@ -41,4 +41,20 @@ export interface Company {
   contactName: string
   city: string
 }
+export interface AdmisionProcessRequest {
+  person: number
+  hiringNeed: number
+  applicationDate: Date
+  interviewDate: Date
+}
 
+
+export interface AdmisionProcessResponse {
+	id:               number;
+	person:           PersonResponse;
+	hiringNeed:       HiringNeed;
+	applicationDate:  Date;
+	interviewDate:    Date;
+	evaluationResult: null;
+	state:            string;
+}

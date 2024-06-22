@@ -1,8 +1,11 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { Observable, catchError } from 'rxjs'
+import { Observable, catchError, map } from 'rxjs'
 import { environment } from '../../../environments/environment'
-import { AdmisionResponse } from '../interfaces/admision.interface'
+import {
+  AdmisionProcessResponse,
+  AdmisionResponse
+} from '../interfaces/admision.interface'
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +35,25 @@ export class AdmisionService {
       .pipe(
         catchError((error: any) => {
           console.error('Error rejecting admission', error)
+          throw error
+        })
+      )
+  }
+
+  createAdmisionProcess (
+    person: number,
+    hiringNeed: number
+  ): Observable<AdmisionProcessResponse> {
+    return this.http
+      .post<AdmisionProcessResponse>(`${environment.apiURL}/admissions`, {
+        person,
+        hiringNeed,
+        applicationDate: new Date(),
+        interviewDate: new Date()
+      })
+      .pipe(
+        catchError((error: any) => {
+          console.error('Error creating admision', error)
           throw error
         })
       )
