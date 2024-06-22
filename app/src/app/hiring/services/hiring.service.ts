@@ -20,4 +20,24 @@ export class HiringService {
         })
       );
   }
+
+  getFinishedHirings(companyId: number): Observable<HiringResponse[]> {
+    return this.http.get<HiringResponse[]>(`${environment.apiURL}/hirings/companies/${companyId}/finished`)
+      .pipe(
+        catchError((error: any) => {
+          console.error('Error al obtener contrataciones', error);
+          throw error;
+        })
+      );
+  }
+
+  getCanceledHirings(companyId: number): Observable<HiringResponse[]> {
+    return this.http.get<HiringResponse[]>(`${environment.apiURL}/hirings/companies/${companyId}/canceled`)
+      .pipe(
+        catchError((error: any) => {
+          console.error('Error al obtener contrataciones', error);
+          throw error;
+        })
+      );
+  }
 }

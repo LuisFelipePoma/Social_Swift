@@ -35,4 +35,12 @@ export class CompanyInformationComponent implements OnInit{
   goToHiringNeeds(companyId: number) {
     this.router.navigate(['hiring-needs'], { queryParams: { company: companyId } });
   }
+
+  goToCanceledHirings(companyId: number) {
+    this.router.navigate(['canceled'], { queryParams: { company: companyId } });
+  }
+
+  goToFinishedHirings(companyId: number) {
+    this.router.navigate(['finished'], { queryParams: { company: companyId } });
+  }
 }
