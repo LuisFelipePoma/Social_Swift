@@ -75,4 +75,13 @@ public class HiringService {
         hiring = hiringRepository.save(hiring);
         return hiringMapper.convertHiringToResponseDTO(hiring);
     }
+
+    public HiringResponseDTO finishHiring(Long id) {
+        Hiring hiring = hiringRepository.findById(id)
+                    .orElseThrow(() -> new ResourceNotFoundException("Hiring not found"));
+
+        hiring.setState("Finished");
+        hiring = hiringRepository.save(hiring);
+        return hiringMapper.convertHiringToResponseDTO(hiring);
+    }
 }

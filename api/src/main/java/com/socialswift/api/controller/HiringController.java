@@ -57,9 +57,15 @@ public class HiringController {
         return new ResponseEntity<>(hiring, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/cancel/{id}")
     public ResponseEntity<HiringResponseDTO> cancelHiring(@PathVariable Long id){
         HiringResponseDTO hiring = hiringService.cancelHiring(id);
+        return new ResponseEntity<>(hiring, HttpStatus.OK);
+    }
+
+    @PutMapping("/finish/{id}")
+    public ResponseEntity<HiringResponseDTO> finishHiring(@PathVariable Long id){
+        HiringResponseDTO hiring = hiringService.finishHiring(id);
         return new ResponseEntity<>(hiring, HttpStatus.OK);
     }
 }
