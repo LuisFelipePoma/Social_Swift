@@ -28,7 +28,7 @@ export class DialogCreateInformationComponent {
     experience: [false],
     contactPhoneReference: [, [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
     contactInformation: [, [Validators.required]],
-    cvUrl: [, [Validators.required]]
+    cvUrl: [, [Validators.required, Validators.pattern('https?://.+')]]
   });
 
   controlHasError(control: string, error: string) {

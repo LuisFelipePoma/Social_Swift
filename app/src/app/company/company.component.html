@@ -1,6 +1,9 @@
 <div class="content">
 	<div>
 		<h1>Compañías</h1>
+		<button mat-fab class="custom-fab" (click)="createCompany()">
+            <mat-icon>add</mat-icon>
+        </button>
 	</div>
 	<div class="companies-div">
 		@for ( item of companyData; track $index) {

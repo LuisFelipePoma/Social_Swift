@@ -36,6 +36,9 @@
     <mat-error *ngIf="controlTouched('cvUrl') && controlHasError('cvUrl', 'required')">
         Hoja de vida obligatoria
     </mat-error>
+    <mat-error *ngIf="controlTouched('cvUrl') && controlHasError('cvUrl', 'pattern')">
+        Ingrese un enlace válido
+    </mat-error>
 
     <div mat-dialog-actions>
       <button mat-button (click)="close()">Cancel</button>

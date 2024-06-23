@@ -1,0 +1,82 @@
+<h1 mat-dialog-title>Create New Person</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="createCompany()">
+    <input matInput formControlName="name" placeholder="Nombre" required>
+    <mat-error *ngIf="controlTouched('name') && controlHasError('name', 'required')">
+        Nombre es obligatorio
+    </mat-error>
+
+    <input matInput formControlName="businessName" placeholder="Razón social" required>
+    <mat-error *ngIf="controlTouched('businessName') && controlHasError('businessName', 'required')">
+        Razón social es obligatoria
+    </mat-error>
+
+    <input matInput formControlName="ruc" placeholder="RUC" required>
+    <mat-error *ngIf="controlTouched('ruc') && controlHasError('ruc', 'required')">
+        RUC es obligatorio
+    </mat-error>
+    <mat-error *ngIf="controlTouched('ruc') && controlHasError('ruc', 'maxlength')">
+        RUC debe tener 11 dígitos
+    </mat-error>
+    <mat-error *ngIf="controlTouched('ruc') && controlHasError('ruc', 'minlength')">
+        RUC debe tener 11 dígitos
+    </mat-error>
+
+    <input matInput formControlName="sector" placeholder="Sector" required>
+    <mat-error *ngIf="controlTouched('sector') && controlHasError('sector', 'required')">
+        Sector es obligatorio
+    </mat-error>
+
+    <input matInput formControlName="address" placeholder="Dirección" required>
+    <mat-error *ngIf="controlTouched('address') && controlHasError('address', 'required')">
+        Dirección es obligatoria
+    </mat-error>
+
+    <input matInput formControlName="phoneNumber" placeholder="Teléfono" required>
+    <mat-error *ngIf="controlTouched('phoneNumber') && controlHasError('phoneNumber', 'required')">
+        Teléfono es obligatorio
+    </mat-error>
+    <mat-error *ngIf="controlTouched('phoneNumber') && controlHasError('phoneNumber', 'minlength')">
+        Teléfono debe tener al menos 8 dígitos
+    </mat-error>
+    <mat-error *ngIf="controlTouched('phoneNumber') && controlHasError('phoneNumber', 'maxlength')">
+        Teléfono no puede exceder los 8 dígitos
+    </mat-error>
+
+    <input matInput formControlName="email" placeholder="Correo electrónico" required>
+    <mat-error *ngIf="controlTouched('email') && controlHasError('email', 'required')">
+        Correo electrónico es obligatorio
+    </mat-error>
+    <mat-error *ngIf="controlTouched('email') && controlHasError('email', 'email')">
+        Por favor ingrese un correo electrónico válido
+    </mat-error>
+
+    <input matInput formControlName="webUrl" placeholder="Sitio web" required>
+    <mat-error *ngIf="controlTouched('webUrl') && controlHasError('webUrl', 'required')">
+        Sitio web es obligatorio
+    </mat-error>
+    <mat-error *ngIf="controlTouched('webUrl') && controlHasError('webUrl', 'pattern')">
+        Sitio web es obligatorio
+    </mat-error>
+
+    <input matInput formControlName="description" placeholder="Descripción" required>
+    <mat-error *ngIf="controlTouched('description') && controlHasError('description', 'required')">
+        Descripción es obligatoria
+    </mat-error>
+
+    <input matInput formControlName="contactName" placeholder="Nombre de contacto" required>
+    <mat-error *ngIf="controlTouched('contactName') && controlHasError('contactName', 'required')">
+        Nombre de contacto es obligatorio
+    </mat-error>
+
+    <input matInput formControlName="city" placeholder="Ciudad" required>
+    <mat-error *ngIf="controlTouched('city') && controlHasError('city', 'required')">
+        Ciudad es obligatoria
+    </mat-error>
+
+    <div mat-dialog-actions>
+      <button mat-button (click)="close()">Cancel</button>
+      <button mat-button type="submit" [disabled]="form.invalid">Create</button>
+    </div>
+  </form>
+</div>
