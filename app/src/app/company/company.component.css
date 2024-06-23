@@ -47,11 +47,24 @@
     }
     h2 {
         margin-bottom: 1rem;
+        color: #03bb85;
+        width: fit-content;
+        margin: 0;
+    }
+    h3 {
+        font-weight: 500;
+        width: fit-content;
     }
 }
 
 a {
     color: #03bb85;
     font-weight: 500;
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+    column-gap: 0.5rem;
 }
   

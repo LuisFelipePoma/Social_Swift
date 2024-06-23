@@ -1,68 +1,72 @@
-<h1 mat-dialog-title>Create New Person</h1>
+<h1 mat-dialog-title>Nueva persona</h1>
 <div mat-dialog-content>
-  <form [formGroup]="form" (ngSubmit)="createPerson()">
-    <input matInput formControlName="dni" placeholder="DNI" required>
-    <mat-error *ngIf="controlTouched('dni') && controlHasError('dni', 'required')">
-        DNI is required
-    </mat-error>
-    <mat-error *ngIf="controlTouched('dni') && controlHasError('dni', 'minlength')">
-        DNI must be at least 8 characters
-    </mat-error>
-    <mat-error *ngIf="controlTouched('dni') && controlHasError('dni', 'maxlength')">
-        DNI cannot exceed 8 characters
-    </mat-error>
-
-    <input matInput formControlName="name" placeholder="Name" required>
-    <mat-error *ngIf="controlTouched('name') && controlHasError('name', 'required')">
-        Name is required
-    </mat-error>
-
-    <input matInput formControlName="lastname" placeholder="Last Name" required>
-    <mat-error *ngIf="controlTouched('lastname') && controlHasError('lastname', 'required')">
-        Last Name is required
-    </mat-error>
-
-    <input matInput [matDatepicker]="picker" formControlName="birthDate" placeholder="Birth Date" required>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-    <mat-error *ngIf="controlTouched('birthDate') && controlHasError('birthDate', 'required')">
-        Birth Date is required
-    </mat-error>
-
-    <input matInput formControlName="address" placeholder="Address" required>
-    <mat-error *ngIf="controlTouched('address') && controlHasError('address', 'required')">
-      Address is required
-    </mat-error>
-
-    <input matInput formControlName="phoneNumber" placeholder="Phone Number" required>
-    <mat-error *ngIf="controlTouched('phoneNumber') && controlHasError('phoneNumber', 'required')">
-      Phone Number is required
-    </mat-error>
-    <mat-error *ngIf="controlTouched('phoneNumber') && controlHasError('phoneNumber', 'minlength')">
-      Phone Number must be at least 8 characters
-    </mat-error>
-    <mat-error *ngIf="controlTouched('phoneNumber') && controlHasError('phoneNumber', 'maxlength')">
-      Phone Number cannot exceed 8 characters
-    </mat-error>
-
-    <input matInput formControlName="email" placeholder="Email" required>
-    <mat-error *ngIf="controlTouched('email') && controlHasError('email', 'required')">
-      Email is required
-    </mat-error>
-    <mat-error *ngIf="controlTouched('email') && controlHasError('email', 'email')">
-      Please enter a valid email address
-    </mat-error>
-
-    <input type="file" accept="image/*" formControlName="picture" required (change)="getFile($event)">
-    <mat-error *ngIf="controlTouched('picture')">
-        <span *ngIf="controlHasError('picture', 'required')">
-            Picture is required
-        </span>
-    </mat-error>
-
-    <div mat-dialog-actions>
-      <button mat-button (click)="close()">Cancel</button>
-      <button mat-button type="submit" [disabled]="form.invalid">Create</button>
-    </div>
-  </form>
+  <div class="content-div">
+    <form [formGroup]="form" (ngSubmit)="createPerson()">
+      <input matInput formControlName="dni" placeholder="DNI" required>
+      <mat-error *ngIf="controlTouched('dni') && controlHasError('dni', 'required')">
+          DNI es obligatorio
+      </mat-error>
+      <mat-error *ngIf="controlTouched('dni') && controlHasError('dni', 'minlength')">
+          DNI debe tener 8 dígitos
+      </mat-error>
+      <mat-error *ngIf="controlTouched('dni') && controlHasError('dni', 'maxlength')">
+        DNI debe tener 8 dígitos
+      </mat-error>
+  
+      <input matInput formControlName="name" placeholder="Nombre" required>
+      <mat-error *ngIf="controlTouched('name') && controlHasError('name', 'required')">
+          Nombre es obligatorio
+      </mat-error>
+  
+      <input matInput formControlName="lastname" placeholder="Apellido" required>
+      <mat-error *ngIf="controlTouched('lastname') && controlHasError('lastname', 'required')">
+          Apellido es obligatorio
+      </mat-error>
+  
+      <div class="input-div">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <input matInput [matDatepicker]="picker" formControlName="birthDate" placeholder="Fecha de nacimiento" required class="input-date" readonly>
+      </div>
+  
+      <input matInput formControlName="address" placeholder="Dirección" required>
+      <mat-error *ngIf="controlTouched('address') && controlHasError('address', 'required')">
+        Dirección es obligatorio
+      </mat-error>
+  
+      <input matInput formControlName="phoneNumber" placeholder="Teléfono" required>
+      <mat-error *ngIf="controlTouched('phoneNumber') && controlHasError('phoneNumber', 'required')">
+        Teléfono es obligatorio
+      </mat-error>
+      <mat-error *ngIf="controlTouched('phoneNumber') && controlHasError('phoneNumber', 'minlength')">
+        Teléfono debe tener 9 dígitos
+      </mat-error>
+      <mat-error *ngIf="controlTouched('phoneNumber') && controlHasError('phoneNumber', 'maxlength')">
+        Teléfono debe tener 9 dígitos
+      </mat-error>
+  
+      <input matInput formControlName="email" placeholder="Correo electrónico" required>
+      <mat-error *ngIf="controlTouched('email') && controlHasError('email', 'required')">
+        Correo electrónico es obligatorio
+      </mat-error>
+      <mat-error *ngIf="controlTouched('email') && controlHasError('email', 'email')">
+        Ingresar correo electrónico válido
+      </mat-error>
+      
+      <div class="input-div">
+        <label for="picture">Foto</label>
+        <input type="file" accept="image/*" formControlName="picture" required (change)="getFile($event)">
+        <mat-error *ngIf="controlTouched('picture')">
+            <span *ngIf="controlHasError('picture', 'required')">
+              Foto obligatoria
+            </span>
+        </mat-error>
+      </div>
+  
+      <div mat-dialog-actions>
+        <button mat-button (click)="close()">Cancel</button>
+        <button mat-button type="submit" [disabled]="form.invalid">Create</button>
+      </div>
+    </form>
+  </div>
 </div>

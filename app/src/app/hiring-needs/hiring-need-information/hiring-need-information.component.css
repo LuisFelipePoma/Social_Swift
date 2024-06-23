@@ -5,6 +5,11 @@
 	margin-top: 2rem;
 }
 
+.name {
+    color: #03bb85;
+    font-size: 50px;
+}
+
 .header {
     padding: 1rem;
     display: flex;

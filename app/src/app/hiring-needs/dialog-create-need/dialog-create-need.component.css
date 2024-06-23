@@ -8,6 +8,12 @@
         display: flex;
         align-items: center;
     }
+
+    padding: 1rem;
+}
+
+h1 {
+    margin-left: 1rem;
 }
 
 .input-div {
@@ -19,4 +25,5 @@ form{
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
+    padding: 1rem;
 }

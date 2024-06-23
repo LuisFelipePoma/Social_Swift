@@ -13,7 +13,9 @@
 			</header>
 			<section class="person-info">
 				<p>{{item.name}} {{item.lastname}}</p>
-				<p>{{item.workingInformation.position}}</p>
+				@if (item.workingInformation) {
+					<p>{{item.workingInformation.position}}</p>
+				}
 			</section>
 			@if (item.blackList) {
 			<div class="flag">

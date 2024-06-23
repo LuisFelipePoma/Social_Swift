@@ -1,0 +1,64 @@
+<h1 mat-dialog-title>Nuevo aviso</h1>
+<div mat-dialog-content>
+  <div class="content-div">
+    <form [formGroup]="form" (ngSubmit)="createNeed()">
+        <input matInput formControlName="position" placeholder="Posición" required>
+        <mat-error *ngIf="controlTouched('position') && controlHasError('position', 'required')">
+            Posición es obligatorio
+        </mat-error>
+
+        <input matInput formControlName="description" placeholder="Descripción" required>
+        <mat-error *ngIf="controlTouched('description') && controlHasError('description', 'required')">
+            Descripción es obligatorio
+        </mat-error>
+
+        <div class="input-div">
+            <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+            <mat-datepicker #pickerStart></mat-datepicker>
+            <input matInput [matDatepicker]="pickerStart" formControlName="startDate" placeholder="Fecha de inicio" required class="input-date" readonly>
+        </div>
+
+        <div class="input-div">
+            <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+            <mat-datepicker #pickerEnd></mat-datepicker>
+            <input matInput [matDatepicker]="pickerEnd" formControlName="endDate" placeholder="Fecha de término" required class="input-date" readonly>
+        </div>
+
+        <input matInput formControlName="amountPeople" placeholder="Número de personas" required>
+        <mat-error *ngIf="controlTouched('amountPeople') && controlHasError('amountPeople', 'required')">
+            Cantidad de personas es obligatorio
+        </mat-error>
+        <mat-error *ngIf="controlTouched('amountPeople') && controlHasError('amountPeople', 'min')">
+            La mínima cantidad de personas es 1.
+        </mat-error>
+
+        <mat-checkbox formControlName="certification">Certificación</mat-checkbox>
+
+        <mat-checkbox formControlName="experience">Experiencia</mat-checkbox>
+
+        <input matInput formControlName="educationLevel" placeholder="Nivel de educación" required>
+        <mat-error *ngIf="controlTouched('educationLevel') && controlHasError('educationLevel', 'required')">
+            Nivel de educación es obligatorio
+        </mat-error>
+
+        <input matInput formControlName="salary" placeholder="Salario" required>
+        <mat-error *ngIf="controlTouched('salary') && controlHasError('salary', 'required')">
+            Nivel de educación es obligatorio
+        </mat-error>
+        <mat-error *ngIf="controlTouched('salary') && controlHasError('salary', 'min')">
+            El salario mínimo es 1.
+        </mat-error>
+
+        <input matInput formControlName="contractType" placeholder="Tipo de contrato" required>
+        <mat-error *ngIf="controlTouched('contractType') && controlHasError('contractType', 'required')">
+            Tipo de contrato es obligatorio
+        </mat-error>
+    
+        <div mat-dialog-actions>
+            <button mat-button (click)="close()">Cancel</button>
+            <button mat-button type="submit" [disabled]="form.invalid">Create</button>
+        </div>
+    </form>
+  </div>
+</div>
+

@@ -1,11 +1,25 @@
+<div class="header">
+  <h1 class="title">Avisos de contratación de {{company?.name}}</h1>
+  <button mat-fab class="custom-fab" (click)="createNeed()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
 <div class="content">
     <div class="card" *ngFor="let item of needsData" (click)="selectNeed(item.id)">
         <div class="card-header">
-          <h1>Compañía: {{ item.company.name }}</h1>
-          <h3>Puesto: {{ item.position }}</h3>
-          <h3>Cantidad: {{ item.amountPeople }}</h3>
-          <h3>Inicio: {{ item.startDate }}</h3>
-          <h3>Fin: {{ item.endDate }}</h3>
+          <h3 class="position">{{ item.position }}</h3>
+          <h3 class="people">{{ item.amountPeople }} personas</h3>
+          <h3 class="people">Inicio: {{ item.startDate }}</h3>
+          <h3 class="people">Fin: {{ item.endDate }}</h3>
+          @if (item.state === "Closed") {
+            <div class="stripe">
+              <p>Cerrado</p>
+            </div>
+          } @else {
+            <button class="close-need" (click)="closeNeed($event, item.id)">
+              Cerrar aviso
+            </button>
+          }
         </div>
     </div>
 </div>

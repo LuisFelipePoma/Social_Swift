@@ -9,13 +9,16 @@
 		@for ( item of companyData; track $index) {
 		<div class="card" (click)="selectCompany(item.id)">
 			<div class="card-header">
-				<h2>{{ item.name }}</h2>
-				<h3>+51 {{ item.phoneNumber }}</h3>
-				<a href="{{item.webUrl}}">{{ item.webUrl }}</a>
+				<div class="contact">
+					<h2>{{ item.name }}</h2>
+					<h3> - +51 {{ item.phoneNumber }}</h3>
+				</div>
+				<br>
+				<p><b>Página web: </b><a href="{{item.webUrl}}">{{ item.webUrl }}</a></p>
 			</div>
 			<div class="card-content">
 				<p>
-					{{ item.description }}
+					<b>Correo de contacto: </b>{{ item.email }}
 				</p>
 			</div>
 		</div>

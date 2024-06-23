@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError } from 'rxjs';
-import { NeedResponse } from '../interfaces/hiring-needs.interface';
+import { NeedRequest, NeedResponse } from '../interfaces/hiring-needs.interface';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
@@ -33,16 +33,23 @@ export class HiringNeedsService {
       );
   }
 
-  // set selectedNeedData(id: number) {
-  //   sessionStorage.setItem(this.sessionStorageKey, id.toString());
-  // }
+  createNeed(needRequest: NeedRequest): Observable<NeedResponse> {
+    return this.http.post<NeedResponse>(`${environment.apiURL}/needs`, needRequest)
+      .pipe(
+        catchError((error: any) => {
+          console.error('Error al obtener aviso de contratación');
+          throw error;
+        })
+      );
+  }
 
-  // get selectedNeed(): number | null {
-  //   const storedId = sessionStorage.getItem(this.sessionStorageKey);
-  //   return storedId ? parseInt(storedId, 10) : null;
-  // }
-
-  // clearSelectedNeedId(){
-  //   sessionStorage.removeItem(this.sessionStorageKey);
-  // }
+  closeNeed(id: number): Observable<NeedResponse> {
+    return this.http.put<NeedResponse>(`${environment.apiURL}/needs/${id}`, null)
+      .pipe(
+        catchError((error: any) => {
+          console.error('Error al obtener aviso de contratación');
+          throw error;
+        })
+      );
+  }
 }

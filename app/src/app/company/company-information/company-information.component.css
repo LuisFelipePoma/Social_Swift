@@ -10,6 +10,11 @@
 	column-gap: 3rem;
 }
 
+.name {
+    color: #03bb85;
+    font-size: 50px;
+}
+
 .button-div {
 	display: flex;
 	justify-content: center;
