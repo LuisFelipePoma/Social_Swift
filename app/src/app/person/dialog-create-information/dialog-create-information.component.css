@@ -1,0 +1,22 @@
+.content-div{
+    input {
+        width: 90%;
+        padding: 1rem;
+    }
+
+    .input-div {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.input-div {
+    width: 97%;
+}
+
+
+form{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}

@@ -40,4 +40,24 @@ export class HiringService {
         })
       );
   }
+
+  cancelHiring(id: number): Observable<HiringResponse> {
+    return this.http.put<HiringResponse>(`${environment.apiURL}/hirings/cancel/${id}`, null)
+      .pipe(
+        catchError((error: any) => {
+          console.error('Error al cancelar contratación', error);
+          throw error;
+        })
+      )
+  }
+
+  finishHiring(id: number): Observable<HiringResponse> {
+    return this.http.put<HiringResponse>(`${environment.apiURL}/hirings/finish/${id}`, null)
+      .pipe(
+        catchError((error: any) => {
+          console.error('Error al cancelar contratación', error);
+          throw error;
+        })
+      )
+  }
 }

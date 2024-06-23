@@ -6,6 +6,27 @@
 	flex-wrap: wrap;
 }
 
+.suspend {
+    height: 1.8rem;
+    margin: 0.5rem 0 !important;
+    width: 100%;
+    border-radius: 8px;
+    border: 2px solid #03bb85;
+    font-weight: 600;
+    font-size: 16px;
+    z-index: 1000;
+    background-color: white;
+    transition: 0.3s ease-in-out;
+}
+
+.suspend:hover {
+    background-color: #d14b4b;
+    color: white;
+    border-color: #d14b4b;
+    cursor: pointer;
+}
+
+
 .card {
 	width: 150px;
 	border: 2px solid #03bb85;

@@ -38,10 +38,10 @@
             Teléfono es obligatorio
         </mat-error>
         <mat-error *ngIf="controlTouched('phoneNumber') && controlHasError('phoneNumber', 'minlength')">
-            Teléfono debe tener al menos 8 dígitos
+            Teléfono debe tener al menos 9 dígitos
         </mat-error>
         <mat-error *ngIf="controlTouched('phoneNumber') && controlHasError('phoneNumber', 'maxlength')">
-            Teléfono no puede exceder los 8 dígitos
+            Teléfono no puede exceder los 9 dígitos
         </mat-error>
     
         <input matInput formControlName="email" placeholder="Correo electrónico" required>

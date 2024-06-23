@@ -15,6 +15,7 @@ import { DialogHiringComponent } from './components/dialog-hiring/dialog-hiring.
 export class HiringComponent implements OnInit {
   hiringsData: HiringResponse[] = []
   readonly dialog = inject(MatDialog)
+  selectedCompanyId?: string | null;
 
   constructor (
     private hiringService: HiringService,
@@ -24,22 +25,27 @@ export class HiringComponent implements OnInit {
 
   ngOnInit (): void {
     // const selectedCompanyId = this.companyService.selectedCompany;
-    const selectedCompanyId = this.route.snapshot.queryParamMap.get('company')
-    console.log(selectedCompanyId)
-    if (selectedCompanyId !== null && !isNaN(+selectedCompanyId)) {
-      this.hiringService.getOKHirings(+selectedCompanyId).subscribe({
-        next: hirings => {
-          this.hiringsData = hirings
-          console.log(this.hiringsData)
-        },
-        error: error => {
-          console.error('Error al obtener contrataciones', error)
-        }
-      })
+    this.selectedCompanyId = this.route.snapshot.queryParamMap.get('company')
+    console.log(this.selectedCompanyId)
+    if (this.selectedCompanyId !== null && !isNaN(+this.selectedCompanyId)) {
+      this.getOkHirings(+this.selectedCompanyId);
     } else {
       console.error('El id de la compañía no es un número')
     }
   }
+
+  getOkHirings(id: number) {
+    this.hiringService.getOKHirings(id).subscribe({
+      next: hirings => {
+        this.hiringsData = hirings
+        console.log(this.hiringsData)
+      },
+      error: error => {
+        console.error('Error al obtener contrataciones', error)
+      }
+    })
+  }
+
   openDialogPerson (item: HiringResponse) {
 		console.log(item)
     this.dialog.open(DialogHiringComponent, {
@@ -47,5 +53,38 @@ export class HiringComponent implements OnInit {
       data: { hiring: item },
       autoFocus: false
     })
+  }
+
+  cancelHiring(event: Event, id: number) {
+    event.stopPropagation();
+    this.hiringService.cancelHiring(id).subscribe({
+      next: canceledHiring => {
+        console.log(canceledHiring);
+        if (this.selectedCompanyId) {
+          this.getOkHirings(+this.selectedCompanyId);
+        } else {
+          console.error('El id de la compañía no es un número')
+        }
+      },
+      error: error => {
+        console.error('Error al cancelar contratación', error)
+      }
+    });
+  }
+
+  finishHiring(event: Event, id: number) {
+    event.stopPropagation();
+    this.hiringService.finishHiring(id).subscribe({
+      next: finishedHiring => {
+        if (this.selectedCompanyId) {
+          this.getOkHirings(+this.selectedCompanyId);
+        } else {
+          console.error('El id de la compañía no es un número')
+        }
+      },
+      error: error => {
+        console.error('Error al cancelar contratación', error)
+      }
+    });
   }
 }

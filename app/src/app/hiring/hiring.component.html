@@ -8,6 +8,14 @@
 			<p>{{item.person.name}} {{item.person.lastname}}</p>
 			<p class="position">{{item.position}}</p>
 		</section>
+		<section class="button-div">
+			<button class="suspend" (click)="cancelHiring($event, item.id)">
+				Suspender
+			</button>
+			<button class="suspend" (click)="finishHiring($event, item.id)">
+				Finalizar
+			</button>
+		</section>
 	</div>
 	}
 </div>

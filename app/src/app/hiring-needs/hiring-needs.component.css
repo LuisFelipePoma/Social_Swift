@@ -50,6 +50,15 @@
     font-weight: 600;
     font-size: 16px;
     z-index: 1000;
+    background-color: white;
+    transition: 0.3s ease-in-out;
+}
+
+.close-need:hover {
+    background-color: #d14b4b;
+    color: white;
+    border-color: #d14b4b;
+    cursor: pointer;
 }
 
 .position {

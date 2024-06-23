@@ -1,48 +1,50 @@
-<h1 mat-dialog-title>Create information</h1>
+<h1 mat-dialog-title>Agregar información laboral</h1>
 <div mat-dialog-content>
-  <form [formGroup]="form" (ngSubmit)="createInformation()">
-    <input matInput formControlName="position" placeholder="Posición" required>
-    <mat-error *ngIf="controlTouched('position') && controlHasError('position', 'required')">
-        Posición es obligatoria
-    </mat-error>
-
-    <input matInput formControlName="educationLevel" placeholder="Nivel de educación" required>
-    <mat-error *ngIf="controlTouched('educationLevel') && controlHasError('educationLevel', 'required')">
-        Nivel de educación es obligatorio
-    </mat-error>
-
-    <!-- checkbox for certification -->
-    <mat-checkbox formControlName="certification">Certificación</mat-checkbox>
-
-    <mat-checkbox formControlName="experience">Experiencia</mat-checkbox>
-
-    <input matInput formControlName="contactPhoneReference" placeholder="Teléfono de referencia" required>
-    <mat-error *ngIf="controlTouched('contactPhoneReference') && controlHasError('contactPhoneReference', 'required')">
-        Teléfono de referencia es obligatorio
-    </mat-error>
-    <mat-error *ngIf="controlTouched('contactPhoneReference') && controlHasError('contactPhoneReference', 'minlength')">
-        Teléfono de referencia 9 dígitos
-    </mat-error>
-    <mat-error *ngIf="controlTouched('contactPhoneReference') && controlHasError('contactPhoneReference', 'maxlength')">
-        Teléfono de referencia 9 dígitos
-    </mat-error>
-
-    <input matInput formControlName="contactInformation" placeholder="Información de contacto" required>
-    <mat-error *ngIf="controlTouched('contactInformation') && controlHasError('contactInformation', 'required')">
-        Información de contacto obligatorio
-    </mat-error>
-
-    <input matInput formControlName="cvUrl" placeholder="Enlace de CV" required>
-    <mat-error *ngIf="controlTouched('cvUrl') && controlHasError('cvUrl', 'required')">
-        Hoja de vida obligatoria
-    </mat-error>
-    <mat-error *ngIf="controlTouched('cvUrl') && controlHasError('cvUrl', 'pattern')">
-        Ingrese un enlace válido
-    </mat-error>
-
-    <div mat-dialog-actions>
-      <button mat-button (click)="close()">Cancel</button>
-      <button mat-button type="submit" [disabled]="form.invalid">Create</button>
-    </div>
-  </form>
+  <div class="content-div">
+    <form [formGroup]="form" (ngSubmit)="createInformation()">
+        <input matInput formControlName="position" placeholder="Posición" required>
+        <mat-error *ngIf="controlTouched('position') && controlHasError('position', 'required')">
+            Posición es obligatoria
+        </mat-error>
+    
+        <input matInput formControlName="educationLevel" placeholder="Nivel de educación" required>
+        <mat-error *ngIf="controlTouched('educationLevel') && controlHasError('educationLevel', 'required')">
+            Nivel de educación es obligatorio
+        </mat-error>
+    
+        <!-- checkbox for certification -->
+        <mat-checkbox formControlName="certification">Certificación</mat-checkbox>
+    
+        <mat-checkbox formControlName="experience">Experiencia</mat-checkbox>
+    
+        <input matInput formControlName="contactPhoneReference" placeholder="Teléfono de referencia" required>
+        <mat-error *ngIf="controlTouched('contactPhoneReference') && controlHasError('contactPhoneReference', 'required')">
+            Teléfono de referencia es obligatorio
+        </mat-error>
+        <mat-error *ngIf="controlTouched('contactPhoneReference') && controlHasError('contactPhoneReference', 'minlength')">
+            Teléfono de referencia 9 dígitos
+        </mat-error>
+        <mat-error *ngIf="controlTouched('contactPhoneReference') && controlHasError('contactPhoneReference', 'maxlength')">
+            Teléfono de referencia 9 dígitos
+        </mat-error>
+    
+        <input matInput formControlName="contactInformation" placeholder="Información de contacto" required>
+        <mat-error *ngIf="controlTouched('contactInformation') && controlHasError('contactInformation', 'required')">
+            Información de contacto obligatorio
+        </mat-error>
+    
+        <input matInput formControlName="cvUrl" placeholder="Enlace de CV" required>
+        <mat-error *ngIf="controlTouched('cvUrl') && controlHasError('cvUrl', 'required')">
+            Hoja de vida obligatoria
+        </mat-error>
+        <mat-error *ngIf="controlTouched('cvUrl') && controlHasError('cvUrl', 'pattern')">
+            Ingrese un enlace válido
+        </mat-error>
+    
+        <div mat-dialog-actions>
+          <button mat-button (click)="close()">Cancel</button>
+          <button mat-button type="submit" [disabled]="form.invalid">Create</button>
+        </div>
+      </form>
+  </div>
 </div>
