@@ -37,16 +37,17 @@
 
 		.position {
 			font-weight: 800;
+			color: #03bb85;
 		}
 
 	}
-}
 
-.card:hover {
-	box-shadow: 0 0 0 3px #03bb85;
-	cursor: pointer;
-
-	h2 {
-		color: #03bb85;
+	&:hover {
+		box-shadow: 0 0 0 3px #03bb85;
+		cursor: pointer;
+	
+		h2 {
+			color: #03bb85;
+		}
 	}
 }

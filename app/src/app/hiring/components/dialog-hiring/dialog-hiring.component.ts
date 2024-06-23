@@ -1,5 +1,5 @@
-import { Component, inject, Inject } from '@angular/core'
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog'
+import { Component, Inject } from '@angular/core'
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog'
 import { HiringResponse } from '../../interfaces/hiring.interface'
 
 @Component({
@@ -12,5 +12,7 @@ export class DialogHiringComponent {
     public dialogRef: MatDialogRef<DialogHiringComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { hiring: HiringResponse }
   ) {}
-  readonly dialog = inject(MatDialog)
+
+  person = this.data.hiring.person
+  hiring = this.data.hiring
 }

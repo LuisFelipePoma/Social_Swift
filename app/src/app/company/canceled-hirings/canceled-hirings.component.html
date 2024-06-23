@@ -2,15 +2,17 @@
     <h2>Contrataciones suspendidas</h2>
 </div>
 <div class="company-personal-list">
-    <div class="hired-person-div" *ngFor="let item of canceledHirings">
-        <img src="data:image/png;base64,{{item.person.picture}}" alt="Person picture">
-        <div class="person-info-div">
-            <p>Nombre: {{item.person.name}} {{item.person.lastname}}</p>
-            <p>DNI: {{item.person.dni}}</p>
-            <p>Inicio de labores: {{item.startDate}}</p>
-            <p>Fin de labores: {{item.endDate}}</p>
-            <p>Salario: S/. {{item.salary}}</p>
-            <p>Puesto: {{item.position}}</p>
-        </div>
-    </div>
+	@for (item of canceledHirings; track $index) {
+		<div class="card">
+			<header>
+				<img src="data:image/png;base64,{{item.person.picture}}">
+			</header>
+			<section class="person-info">
+				<p>{{item.person.name}} {{item.person.lastname}}</p>
+				<p class="position">{{item.position}}</p>
+				<p class="salary">S/. {{item.salary}}</p>
+				<p class="date">Estado: {{item.state}}</p>
+			</section>
+		</div>
+		}
 </div>

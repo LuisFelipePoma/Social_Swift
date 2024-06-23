@@ -1,1 +1,21 @@
-<p>dialog-hiring works!</p>
+<h2 mat-dialog-title>{{person.name}} {{person.lastname}}</h2>
+<mat-dialog-content class="mat-typography">
+
+	<h3>Información laboral</h3>
+	<p><b>Posición: </b>{{hiring.position}}</p>
+	<p><b>Sueldo: </b>S/. {{hiring.salary}}</p>
+	<p><b>Empezo: </b>{{hiring.startDate}}</p>
+	<p><b>Finalizara: </b>{{hiring.endDate}}</p>
+
+	<br>
+	<h3>Información personal</h3>
+	<p><b>DNI: </b>{{person.dni}}</p>
+	<p><b>Dirección: </b>{{person.address}}</p>
+	<p><b>Correo: </b>{{person.email}}</p>
+	<p><b>Teléfono: </b>{{person.phoneNumber}}</p>
+	<p><b>Fecha de nacimiento: </b>{{person.birthDate}}</p>
+	<p><b>Vetado: </b>{{person.blackList ? 'Sí' : 'No'}}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+	<button mat-button mat-dialog-close cdkFocusInitial>Cerrar</button>
+</mat-dialog-actions>

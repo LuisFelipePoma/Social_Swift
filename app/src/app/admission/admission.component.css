@@ -38,17 +38,20 @@
 		}
 	}
 
-	section{
+	section {
 		display: grid;
 		gap: 0.5rem;
-		p{
+
+		p {
 			margin: 0;
 			text-align: center;
-			&:last-child{
+
+			&:last-child {
 				font-weight: 800;
+				color: #03bb85;
 			}
 		}
-		
+
 	}
 
 

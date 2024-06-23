@@ -1,26 +1,27 @@
 <div class="content">
-    <div class="header">
-        <div class="company-information-div">
-            <h1><b>Compañía: </b>{{company?.name}}</h1>
-            <h1><b>Razón social: </b>{{company?.businessName}}</h1>
-            <h1><b>RUC: </b>{{company?.ruc}}</h1>
-            <p><b>Sector económico: </b>{{company?.sector}}</p>
-            <p><b>Dirección: </b>{{company?.address}}</p>
-            <p><b>Teléfono: </b>+51 {{company?.phoneNumber}}</p>
-            <p><b>Nombre de contacto: </b>{{company?.contactName}}</p>
-            <p><b>Correo electrónico: </b>{{company?.email}}</p>
-            <p><b>Página web: </b><a href="{{company?.webUrl}}">{{company?.webUrl}}</a></p>
-            <p><b>Descripción: </b>{{company?.description}}</p>
-            <p><b>Ciudad: </b>{{company?.city}}</p>
-        </div>
-        <div class="button-div">
-            <button (click)="goToHiringNeeds(company?.id ?? 0)">Avisos de contratación</button>
-            <button (click)="goToCanceledHirings(company?.id ?? 0)">Contrataciones suspendidas</button>
-            <button (click)="goToFinishedHirings(company?.id ?? 0)">Contrataciones finalizadas</button>
-        </div>
-    </div>
-    <div class="hiring-title">
-        <h2>Personal contratado</h2>
-    </div>
-    <app-hiring></app-hiring>
+	<div class="header">
+		<div class="company-information-div">
+			<h1><b>Compañía: </b>{{company?.name}}</h1>
+			<h1><b>Razón social: </b>{{company?.businessName}}</h1>
+			<h1><b>RUC: </b>{{company?.ruc}}</h1>
+			<p><b>Sector económico: </b>{{company?.sector}}</p>
+			<p><b>Dirección: </b>{{company?.address}}</p>
+			<p><b>Teléfono: </b>+51 {{company?.phoneNumber}}</p>
+			<p><b>Nombre de contacto: </b>{{company?.contactName}}</p>
+			<p><b>Correo electrónico: </b>{{company?.email}}</p>
+			<p><b>Página web: </b><a href="{{company?.webUrl}}">{{company?.webUrl}}</a></p>
+			<p><b>Descripción: </b>{{company?.description}}</p>
+			<p><b>Ciudad: </b>{{company?.city}}</p>
+			<div class="button-div">
+				<button (click)="goToHiringNeeds(company?.id ?? 0)">Avisos de contratación</button>
+				<button (click)="goToCanceledHirings(company?.id ?? 0)">Contrataciones suspendidas</button>
+				<button (click)="goToFinishedHirings(company?.id ?? 0)">Contrataciones finalizadas</button>
+
+			</div>
+		</div>
+	</div>
+	<div class="hiring-title">
+		<h2>Personal contratado</h2>
+		<app-hiring></app-hiring>
+	</div>
 </div>
