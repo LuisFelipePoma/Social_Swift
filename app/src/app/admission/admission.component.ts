@@ -38,10 +38,11 @@ export class AdmissionComponent {
     }
   }
 
-  openDialog (person: PersonResponse, admissionProcess: number): void {
+  openDialog (person: PersonResponse, admissionId: number, state: string): void {
     const dialogRef = this.dialog.open(DialogAdmisionComponent, {
       width: '600px',
-      data: { person, admissionProcess}
+      data: { person, admissionId, state },
+      autoFocus: false
     })
 
     dialogRef.afterClosed().subscribe(result => {

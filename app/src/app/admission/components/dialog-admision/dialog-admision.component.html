@@ -20,13 +20,16 @@
 	<p><b>Información de contacto: </b>{{data.person.workingInformation.contactPhoneReference}}</p>
 	<p><b>Teléfono de contacto de referencia: </b>{{data.person.workingInformation.contactPhoneReference}}</p>
 	<p><b>Fecha de registro: </b>{{data.person.workingInformation.registrationDate}}</p>
-	<p><b>Hoja de vida: </b><a href="{{data.person.workingInformation.cvUrl}}">{{data.person.workingInformation.cvUrl}}</a></p>
+	<p><b>Hoja de vida: </b><a
+			href="{{data.person.workingInformation.cvUrl}}">{{data.person.workingInformation.cvUrl}}</a></p>
 	}@else {
 	<p>No disponible</p>
 	}
 </mat-dialog-content>
 <mat-dialog-actions>
 	<button mat-button mat-dialog-close>Regresar</button>
+	@if (data.state === "Pending") {
 	<button mat-button (click)="handleAdmision(true)">Admitir</button>
 	<button mat-button (click)="handleAdmision(false)">Rechazar</button>
+	}
 </mat-dialog-actions>

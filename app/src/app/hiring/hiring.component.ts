@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { HiringResponse } from './interfaces/hiring.interface';
 import { HiringService } from './services/hiring.service';
 import { CompanyService } from '../company/services/company.service';
+import { PersonResponse } from '../person/interfaces/person.interface';
 
 @Component({
   selector: 'app-hiring',
@@ -36,4 +37,7 @@ export class HiringComponent implements OnInit{
       console.error('El id de la compañía no es un número');
     }
   }
+	openDialogPerson(item:HiringResponse){
+
+	}
 }

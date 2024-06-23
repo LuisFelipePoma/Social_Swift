@@ -12,7 +12,7 @@ export class DialogAdmisionComponent {
   constructor (
     public dialogRef: MatDialogRef<DialogAdmisionComponent>,
     @Inject(MAT_DIALOG_DATA)
-    public data: { person: PersonResponse; admissionProcess: number },
+    public data: { person: PersonResponse; admissionId: number; state: string },
     private admisionService: AdmisionService,
     public snackbar: MatSnackBar
   ) {}
@@ -21,7 +21,7 @@ export class DialogAdmisionComponent {
     console.log('admintiento........')
     if (isAdmited) {
       this.admisionService
-        .acceptAdmissionById(this.data.admissionProcess)
+        .acceptAdmissionById(this.data.admissionId)
         .subscribe({
           next: response => {
             this.dialogRef.close(response.state)
@@ -43,7 +43,7 @@ export class DialogAdmisionComponent {
         })
     } else {
       this.admisionService
-        .rejectAdmissionById(this.data.admissionProcess)
+        .rejectAdmissionById(this.data.admissionId)
         .subscribe({
           next: response => {
             this.dialogRef.close(response.state)

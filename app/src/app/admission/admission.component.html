@@ -1,13 +1,31 @@
 <div class="content">
 	@for (item of admisionData; track $index) {
-	<div class="card" (click)="openDialog(item.person,item.id)">
-		<div class="card-header">
-			<h1>{{item.person.name}}</h1>
-			<h3>{{item.person.lastname}}</h3>
+	<div class="card" (click)="openDialog(item.person,item.id,item.state)">
+		<header>
+			<img src="data:image/png;base64,{{item.person.picture}}" alt="">
+		</header>
+		@switch (item.state) {
+		@case ("Pending") {
+		<div>
+			<span style="background-color: #8d8d8c;">Pendiente</span>
 		</div>
-		<img src="data:image/png;base64,{{item.person.picture}}" alt="">
-		<h3>{{item.state}}</h3>
-		<p>{{item.interviewDate}}</p>
+
+		}
+		@case ("Admitted") {
+		<div>
+			<span style="background-color: #03bb85;">Admitido</span>
+		</div>
+		}
+		@case ("Rejected") {
+		<div>
+			<span style="background-color: #d14b4b;">Rechazado</span>
+		</div>
+		}
+		}
+		<section>
+			<p>{{item.person.name}} {{item.person.lastname}}</p>
+			<p>{{item.person.workingInformation.position}}</p>
+		</section>
 	</div>
 	}
 </div>

@@ -20,7 +20,9 @@ export class PipeAdmisionsPipe implements PipeTransform {
         this.inplies(
           need.certification,
           person.workingInformation.certification
-        ) && this.inplies(need.experience, person.workingInformation.experience)
+        ) &&
+        this.inplies(need.experience, person.workingInformation.experience) &&
+        need.position === person.workingInformation.position
       )
     }
     return false
@@ -29,6 +31,4 @@ export class PipeAdmisionsPipe implements PipeTransform {
   inplies (key: boolean, value: boolean) {
     return !key || value
   }
-
-	
 }

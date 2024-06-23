@@ -12,13 +12,11 @@
 			<p><b>Educación: </b>{{ need?.educationLevel }}</p>
 			<p><b>Tipo de contrato: </b>{{ need?.contractType }}</p>
 			<p><b>Estado: </b>{{ need?.state }}</p>
+			<div class="button-div">
+				<button (click)="showdialog()">Filtrar</button>
+			</div>
 		</div>
-		<div class="button-div">
-			<button (click)="showdialog()">Filtrar</button>
-		</div>
+
 	</div>
-	<div class="admission-title">
-		<h2>Personal a procesar</h2>
-		<app-admission></app-admission>
-	</div>
+	<app-admission></app-admission>
 </div>

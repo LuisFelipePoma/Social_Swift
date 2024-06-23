@@ -1,22 +1,26 @@
 <div class="content">
-    <div class="header">
-        <h1>Personas</h1>
-        <button mat-fab class="custom-fab" (click)="createPerson()">
-            <mat-icon>add</mat-icon>
-        </button>
-    </div>
-    <div class="company-personal-list">
-        <div class="hired-person-div" *ngFor="let item of peopleData" (click)="openDialog(item)">
-            <img src="data:image/png;base64,{{item.picture}}" alt="Person picture">
-            <div class="person-info-div">
-                <p><b>Nombre: </b>{{item.name}} {{item.lastname}}</p>
-                <p><b>DNI: </b>{{item.dni}}</p>
-                <p><b>Dirección: </b>{{item.address}}</p>
-                <p><b>Correo: </b>{{item.email}}</p>
-                <p><b>Teléfono: </b>{{item.phoneNumber}}</p>
-                <p><b>Fecha de nacimiento: </b>{{item.birthDate}}</p>
-                <p><b>Vetado: </b>{{item.blackList ? 'Sí' : 'No'}}</p>
-            </div>
-        </div>
-    </div>    
+	<div class="header">
+		<h1>Personas</h1>
+		<button mat-fab class="custom-fab" (click)="createPerson()">
+			<mat-icon>add</mat-icon>
+		</button>
+	</div>
+	<div class="company-personal-list">
+		@for (item of peopleData; track $index) {
+		<div class="card" (click)="openDialog(item)">
+			<header>
+				<img src="data:image/png;base64,{{item.picture}}" alt="">
+			</header>
+			<section class="person-info">
+				<p>{{item.name}} {{item.lastname}}</p>
+				<p>{{item.workingInformation.position}}</p>
+			</section>
+			@if (item.blackList) {
+			<div class="flag">
+				<span style="background-color: #8d8d8c;">Vetado</span>
+			</div>
+			}
+		</div>
+		}
+	</div>
 </div>

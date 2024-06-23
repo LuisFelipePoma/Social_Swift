@@ -1,13 +1,15 @@
 <div class="company-personal-list">
-    <div class="hired-person-div" *ngFor="let item of hiringsData">
-        <img src="data:image/png;base64,{{item.person.picture}}" alt="Person picture">
-        <div class="person-info-div">
-            <p>Nombre: {{item.person.name}} {{item.person.lastname}}</p>
-            <p>DNI: {{item.person.dni}}</p>
-            <p>Inicio de labores: {{item.startDate}}</p>
-            <p>Fin de labores: {{item.endDate}}</p>
-            <p>Salario: S/. {{item.salary}}</p>
-            <p>Puesto: {{item.position}}</p>
-        </div>
-    </div>
+	@for (item of hiringsData; track $index) {
+	<div class="card" (click)="openDialogPerson(item)">
+		<header>
+			<img src="data:image/png;base64,{{item.person.picture}}" alt="">
+		</header>
+		<section class="person-info">
+			<p>{{item.person.name}} {{item.person.lastname}}</p>
+			<p class="position">{{item.position}}</p>
+			<p>{{item.salary}}</p>
+			<p>{{item.state}}</p>
+		</section>
+	</div>
+	}
 </div>
