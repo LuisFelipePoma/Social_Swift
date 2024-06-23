@@ -27,6 +27,7 @@ export class DialogFilterInfoComponent implements OnInit {
       .subscribe({
         next: response => {
           console.log(response)
+          this.dialogRef.close(person)
 					this.snackBar.open(`El empleado ${response.person.lastname} se agrego al proceso`, 'Cerrar', {
             duration: 5000,
             verticalPosition: 'bottom',
@@ -42,6 +43,5 @@ export class DialogFilterInfoComponent implements OnInit {
           console.error('Error al crear admisión', error)
         }
       })
-    this.dialogRef.close(person)
   }
 }

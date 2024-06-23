@@ -11,7 +11,13 @@
 			<p><b>Salario: </b>S/. {{ need?.salary }}</p>
 			<p><b>Educación: </b>{{ need?.educationLevel }}</p>
 			<p><b>Tipo de contrato: </b>{{ need?.contractType }}</p>
-			<p><b>Estado: </b>{{ need?.state }}</p>
+			<p><b>Estado: </b>
+				@if (need?.state == 'Ongoing') {
+					Vigente
+				} @else {
+					Cerrado
+				}
+			</p>
 			<div class="button-div">
 				<button (click)="showdialog()">Filtrar</button>
 			</div>

@@ -46,9 +46,8 @@ export class HiringNeedInformationComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed')
-      if (result !== undefined && result !== '') {
-        console.log(result)
+      if(result){
+        window.location.reload()
       }
     })
   }

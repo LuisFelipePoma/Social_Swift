@@ -58,9 +58,8 @@ export class DialogFilterComponent {
     })
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed')
-      if (result !== undefined && result !== '') {
-        console.log(result)
+      if(result) {
+        this.dialogRef.close(result);
       }
     })
   }

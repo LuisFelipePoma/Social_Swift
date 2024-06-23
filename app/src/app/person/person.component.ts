@@ -63,6 +63,13 @@ export class PersonComponent implements OnInit {
           data: { createdPerson }
         });
 
+        dialogCreateInfoRef.afterClosed().subscribe(createdInformation => {
+          console.log(createdInformation);
+          if (createdInformation) {
+            this.getAllPeople();
+          }
+        });
+
         this.snackBar.open('Usuario agregado', 'Cerrar', {
             duration: 5000,
             verticalPosition: 'bottom',

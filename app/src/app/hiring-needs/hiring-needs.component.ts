@@ -74,7 +74,12 @@ export class HiringNeedsComponent implements OnInit{
     dialogRef.afterClosed().subscribe(createdNeed => {
       console.log(createdNeed);
       if(createdNeed) {
-        this.needsData.push(createdNeed);
+        // this.needsData.push(createdNeed);
+        if (this.selectedCompanyId != null) {
+          this.getAllNeeds(+this.selectedCompanyId);
+        } else {
+          console.error('selectedCompanyId is null or undefined');
+        }
 
         this.snackBar.open('Aviso agregado', 'Cerrar', {
           duration: 5000,
